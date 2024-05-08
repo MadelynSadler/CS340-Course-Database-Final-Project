@@ -21,14 +21,14 @@ VALUES
 (3, 'CS290', 'Jane Smith', 'Winter', 'KEC1004', '12:00-12:50');
 
 -- Create Sessions table
-CREATE  OR REPLACE TABLE Sessions (
+CREATE  OR REPLACE TABLE Sessions ( 
     sessionID INT AUTO_INCREMENT UNIQUE NOT NULL,
     classNumber INT,
     day DATE,
     week INT,
     topic VARCHAR(255) NOT NULL,
     PRIMARY KEY (sessionID),
-    FOREIGN KEY (classNumber) REFERENCES Classes(classNumber)
+    FOREIGN KEY (classNumber) REFERENCES Classes(classNumber) ON DELETE CASCADE
 );
 
 -- Insert data into Sessions table
@@ -46,7 +46,7 @@ CREATE OR REPLACE TABLE Assignments (
     weight FLOAT,
     description VARCHAR(255),
     PRIMARY KEY (assignmentID),
-    FOREIGN KEY (classNumber) REFERENCES Classes(classNumber)
+    FOREIGN KEY (classNumber) REFERENCES Classes(classNumber) ON DELETE CASCADE
 );
 
 -- Insert data into Assignments table
