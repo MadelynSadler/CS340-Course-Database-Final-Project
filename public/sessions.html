@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sessions</title>
+</head>
+<body>
+  <div>
+    <a href="./index.html"><p>&#8592;</p></a>
+    <h1>Sessions</h1>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Session ID</th>
+        <th>Class Number</th>
+        <th>Day</th>
+        <th>Week</th>
+        <th>Topic</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>558</td>
+        <td>1</td>
+        <td>2024-01-16</td>
+        <td>2</td>
+        <td>OOP</td>
+        <td><button type="submit">Update</button></td>
+        <td><button type="submit">Delete</button></td>
+      </tr>
+      <tr>
+        <td>559</td>
+        <td>1</td>
+        <td>2024-01-18</td>
+        <td>2</td>
+        <td>Pointers</td>
+        <td><button type="submit">Update</button></td>
+        <td><button type="submit">Delete</button></td>
+      </tr>
+      <tr>
+        <td>560</td>
+        <td>1</td>
+        <td>2024-01-20</td>
+        <td>2</td>
+        <td>Memory allocation</td>
+        <td><button type="submit">Update</button></td>
+        <td><button type="submit">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <form id="add-session-form">
+    <label for="sessionID">Session ID:</label>
+    <input type="text" id="sessionID" name="sessionID" required>
+    <label for="classNumber">Class Number:</label>
+    <input type="text" id="classNumber" name="classNumber" required>
+    <label for="day">Day:</label>
+    <input type="text" id="day" name="day" required>
+    <label for="week">Week:</label>
+    <input type="text" id="week" name="week" required>
+    <label for="topic">Topic:</label>
+    <input type="text" id="topic" name="topic" required>
+    <button type="submit">Add Session</button>
+  </form>
+</body>
+</html>
