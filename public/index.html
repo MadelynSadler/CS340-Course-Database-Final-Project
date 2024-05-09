@@ -1,17 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Classes</title>
+</head>
+<body>
+  <h1>Classes</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Class Number</th>
+        <th>Class Name</th>
+        <th>Professor Name</th>
+        <th>Term</th>
+        <th>Location</th>
+        <th>Meeting Time</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>CS162</td>
+        <td>Bob Joe</td>
+        <td>Spring</td>
+        <td>JOHN112</td>
+        <td>10:00-11:50</td>
+        <td><button type="submit">Update</button></td>
+        <td><button type="submit">Delete</button></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>CS261</td>
+        <td>John Smith</td>
+        <td>Spring</td>
+        <td>KIDD344</td>
+        <td>4:00-5:20</td>
+        <td><button type="submit">Update</button></td>
+        <td><button type="submit">Delete</button></td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>CS290</td>
+        <td>Jane Smith</td>
+        <td>Winter</td>
+        <td>KEC1004</td>
+        <td>12:00-12:50</td>
+        <td><button type="submit">Update</button></td>
+        <td><button type="submit">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <form id="add-class-form">
+    <label for="classNumber">Class Number:</label>
+    <input type="text" id="classNumber" name="classNumber">
+    <label for="className">Class Name:</label>
+    <input type="text" id="className" name="className">
+    <label for="professorName">Professor Name:</label>
+    <input type="text" id="professorName" name="professorName">
+    <label for="term">Term:</label>
+    <input type="text" id="term" name="term">
+    <label for="location">Location:</label>
+    <input type="text" id="location" name="location">
+    <label for="meetingTime">Meeting Time:</label>
+    <input type="text" id="meetingTime" name="meetingTime">
+    <button type="submit">Add Class</button>
+  </form>
+  <ul>
+    <li><a href="sessions.html">Sessions</a></li>
+    <li><a href="assignments.html">Assignments</a></li>
+    <li><a href="students.html">Students</a></li>
+  </ul>
+</body>
 </html>
