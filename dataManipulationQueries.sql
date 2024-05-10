@@ -4,11 +4,72 @@
 -- update should be able to set a foreign key value to NULL
 
 -- select queries (5 - one for each table and each relationship)
+-- all assignments from a class
+SELECT Assignments.assignmentID, Assignments.dueDate, Assignments.weight, Assignments.description
+FROM Assignments
+JOIN Classes ON Assignments.classNumber = Classes.classNumber
+WHERE Classes.className = :className
+ORDER BY Assignments.dueDate ASC;
+
+-- select all students registered in a class
+SELECT Students.studentID from Students
+JOIN ClassesStudents ON Stduents.studentID = ClassesStudents.studentID
+JOIN Classes on ClassesStudents.classNumber = Classes.classNumber
+WHERE Classes.className = :className
+ORDER BY Students.studentID ASC;
+
+-- select all sessions for a particular class
+SELECT Sessions.day, Sessions.week, Sessions.topic from Sessions
+Join Classes on Sessions.classNumber = Classes.classNumber
+Where Classes = :className
+ORDER BY Sessions.day ASC;
+
+-- select all classes a certain student is registered for
+SELECT Classes.* from Classes
+JOIN ClassesStudents ON Classes.classNumber = ClassesStudents.classNumber
+JOIN Students ON ClassesStudents.studentID = Students.studentID
+Where Students.studentID = :studentID
+ORDER BY Classes.classNumber ASC;
+
+-- select all classes that a certain professor teaches
+SELECT * FROM Classes
+WHERE professorName = :professorName;
 
 -- foreign key drop down selects
+SELECT classNumber from ClassesStudents;
+SELECT studentID from ClassesStudents;
+SELECT classNumber from Sessions;
+SELECT classNumber from Assignments;
 
 -- insertion queries (5 - one for each table)
+INSERT INTO Classes (classNumber, className, professorName, term, location, meetingTime)
+VALUES
+(:classNumber, :className, professorName, :term, :location, :meetingTime);
+
+INSERT INTO Sessions (sessionID, classNumber, day, week, topic)
+VALUES
+(:sessionID, :classNumber, :day, :week, :topic);
+
+INSERT INTO Assignments (assignmentID, classNumber, dueDate, weight, description)
+VALUES
+(:assignmentID, :classNumber, :dueDate, :weight, :description);
+
+INSERT INTO Students (studentID)
+VALUES
+(:studentID);
+
+INSERT INTO ClassesStudents (registrationID, classNumber, studentID)
+VALUES
+(:registrationID, :classNumber, ;studentID)
 
 -- update queries (1 - a NULLable relationship)
+UPDATE Assignments
+SET dueDate = :dueDate
+WHERE assignmentID = :assignmentID;
+
+UPDATE Sessions
+SET topic = :topic
+WHERE sessionID = :sessionID;
 
 -- delete queries (1 from M:N)
+DELETE FROM Classes where className = :className;
