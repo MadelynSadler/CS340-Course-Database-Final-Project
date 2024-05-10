@@ -71,5 +71,9 @@ UPDATE Sessions
 SET topic = :topic
 WHERE sessionID = :sessionID;
 
+<<<<<<< HEAD
 -- delete queries (1 from M:N)
 DELETE FROM Classes where className = :className;
+=======
+-- delete queries (1 from M:N)
+>>>>>>> main
