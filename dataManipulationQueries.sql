@@ -67,6 +67,7 @@ UPDATE Assignments
 SET dueDate = :dueDate
 WHERE assignmentID = :assignmentID;
 
+<<<<<<< HEAD
 UPDATE Sessions
 SET topic = :topic
 WHERE sessionID = :sessionID;
@@ -74,6 +75,9 @@ WHERE sessionID = :sessionID;
 <<<<<<< HEAD
 -- delete queries (1 from M:N)
 DELETE FROM Classes where className = :className;
+=======
+-- delete queries (1 from M:N)
+>>>>>>> main
 =======
 -- delete queries (1 from M:N)
 >>>>>>> main

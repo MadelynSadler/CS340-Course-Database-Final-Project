@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assignments</title>
+</head>
+<body>
+  <a href="./index.html"><p>&#8592;</p></a>
+  <h1>Assignments</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Assignment ID</th>
+        <th>Class Number</th>
+        <th>Due Date</th>
+        <th>Weight</th>
+        <th>Description</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>10</td>
+        <td>1</td>
+        <td>2024-03-29</td>
+        <td>15.5</td>
+        <td>Hunt the Wumpus</td>
+        <td><button type="submit">Update</button></td>
+        <td><button type="submit">Delete</button></td>
+      </tr>
+      <tr>
+        <td>20</td>
+        <td>1</td>
+        <td>2024-03-30</td>
+        <td>10.0</td>
+        <td>Cafe Program</td>
+        <td><button type="submit">Update</button></td>
+        <td><button type="submit">Delete</button></td>
+      </tr>
+      <tr>
+        <td>30</td>
+        <td>1</td>
+        <td>2024-04-02</td>
+        <td>12.5</td>
+        <td>Basketball Pointers</td>
+        <td><button type="submit">Update</button></td>
+        <td><button type="submit">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <form id="add-assignment-form">
+    <label for="assignmentID">Assignment ID:</label>
+    <input type="text" id="assignmentID" name="assignmentID" required>
+    <label for="classNumber">Class Number:</label>
+    <input type="text" id="classNumber" name="classNumber" required>
+    <label for="dueDate">Due Date:</label>
+    <input type="text" id="dueDate" name="dueDate" required>
+    <label for="weight">Weight:</label>
+    <input type="text" id="weight" name="weight" required>
+    <label for="description">Description:</label>
+    <input type="text" id="description" name="description" required>
+    <button type="submit">Add Assignment</button>
+  </form>
+</body>
+</html>
