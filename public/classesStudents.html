@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Students</title>
+  <title>ClassesStudents</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -37,7 +37,7 @@
       margin-bottom: 8px;
       font-weight: bold;
     }
-    form input {
+    form input, form select {
       width: 100%;
       padding: 8px;
       margin-bottom: 16px;
@@ -61,38 +61,54 @@
     <a href="index.html">[ Classes</a> | 
     <a href="sessions.html">Sessions</a> | 
     <a href="assignments.html">Assignments</a> | 
-    <a href="students.html">Students</a> |
+    <a href="students.html">Students</a> | 
     <a href="classesStudents.html">ClassesStudents</a> ]
   </p>
-  <h1>Students</h1>
+  <h1>ClassesStudents</h1>
   <table>
     <thead>
       <tr>
+        <th>Registration ID</th>
+        <th>Class Number</th>
         <th>Student ID</th>
-        <th>Action</th>
       </tr>
     </thead>
-  <tbody>
-    <tr>
-      <td>123</td>
-      <td><button type="submit">Update</button></td>
-      <td><button type="submit">Delete</button></td>
-    </tr>
-    <tr>      
-      <td>124</td>
-      <td><button type="submit">Update</button></td>
-      <td><button type="submit">Delete</button></td>
-    </tr>
-    <tr>      
-      <td>125</td>
-      <td><button type="submit">Update</button></td>
-      <td><button type="submit">Delete</button></td>
-    </tr>
-  </tbody>
+    <tbody>
+      <tr>
+        <td>12301</td>
+        <td>1</td>
+        <td>123</td>
+      </tr>
+      <tr>
+        <td>12302</td>
+        <td>2</td>
+        <td>123</td>
+      </tr>
+      <tr>
+        <td>12303</td>
+        <td>3</td>
+        <td>123</td>
+      </tr>
+    </tbody>
   </table>
-  <form id="add-student-form">
-    <label>Add a new Student:</label><br>
-    </select><br>    <button type="submit">Add Student</button>
-  </form>
+  
+  <div class="add-registration-container">
+    <label>Add a new registration:</label><br>
+    <form id="add-registration-form">
+      <label for="classNumber">Class Number:</label>
+      <select id="classNumber" name="classNumber" required>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+      </select><br>
+      <label for="studentID">Student ID:</label>
+      <select id="studentID" name="studentID" required>
+        <option value="123">123</option>
+        <option value="124">124</option>
+        <option value="125">125</option>
+      </select><br>
+      <button type="submit">Add Registration</button>
+    </form>
+  </div>
 </body>
 </html>
