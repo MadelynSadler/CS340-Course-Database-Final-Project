@@ -4,6 +4,23 @@
 -- update should be able to set a foreign key value to NULL
 
 -- select queries (5 - one for each table and each relationship)
+-- all information selects
+SELECT Assignments.assignmentID, Classes.className, Assignments.dueDate, Assignments.weight, Assignments.description 
+FROM Assignments
+INNER JOIN Classes ON Classes.classNumber = Assignments.classNumber;
+
+SELECT * FROM Students;
+
+SELECT * FROM Classes;
+
+SELECT ClassesStudents.registrationID, Classes.className, studentID
+FROM ClassesStudents
+INNER JOIN Classes on Classes.classNumber = ClassesStudents.classNumber;
+
+SELECT Sessions.sessionID, Classes.classNumber, Sessions.day, Sessions.week, Sessions.topic
+FROM Sessions
+INNER JOIN Classes on Classes.classNumber = Sessions.classNumber;
+
 -- all assignments from a class
 SELECT Assignments.assignmentID, Assignments.dueDate, Assignments.weight, Assignments.description
 FROM Assignments
@@ -63,13 +80,41 @@ VALUES
 (:registrationID, :classNumber, ;studentID)
 
 -- update queries (1 - a NULLable relationship)
-UPDATE Assignments
-SET dueDate = :dueDate
-WHERE assignmentID = :assignmentID;
+
+UPDATE Classes
+SET
+    className = :className,
+    professorName = :professorName,
+    term = :term,
+    location = :location,
+    meetingTime = :meetingTime
+WHERE classNumber = :classNumber;
 
 UPDATE Sessions
-SET topic = :topic
+SET
+    classNumber = :classNumber,
+    day = :date,
+    week = :week,
+    topic = :topic
 WHERE sessionID = :sessionID;
+
+UPDATE Assignments
+SET
+    classNumber = :classNumber,
+    dueDate = :dueDate,
+    weight = :weight,
+    description = :description
+WHERE assignmentID = :assignmentID;
+
+UPDATE ClassesStudents
+SET
+    classNumber = :classNumber,
+    studnetID = :studentID
+WHERE registrationID = :registrationID
 
 -- delete queries (1 from M:N)
 DELETE FROM Classes where className = :className;
+DELETE FROM ClassesStudents where registrationID = :registrationID;
+DELETE FROM Assignments where assignemntID = :assignemntID;
+DELETE FROM Sessions where sessionID = :sessionID;
+DELETE FROM Students where studentID = :studentID;  
