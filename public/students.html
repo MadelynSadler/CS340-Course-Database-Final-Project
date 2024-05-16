@@ -6,7 +6,13 @@
   <title>Students</title>
 </head>
 <body>
-  <a href="./index.html"><p>&#8592;</p></a>
+  <p>
+    <a href="index.html">[ Classes</a> | 
+    <a href="sessions.html">Sessions</a> | 
+    <a href="assignments.html">Assignments</a> | 
+    <a href="students.html">Students</a> |
+    <a href="classesStudents.html">ClassesStudents</a> ]
+  </p>
   <table>
     <thead>
       <tr>
@@ -33,9 +39,13 @@
   </tbody>
   </table>
   <form id="add-student-form">
+    <label>Add a new Student:</label><br>
     <label for="studentID">Student ID:</label>
-    <input type="text" id="studentID" name="studentID" required>
-    <button type="submit">Add Student</button>
+    <select id="studentID" name="studentID" required>
+      <option value="123">123</option>
+      <option value="124">124</option>
+      <option value="125">125</option>
+    </select><br>    <button type="submit">Add Student</button>
   </form>
 </body>
 </html>

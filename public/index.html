@@ -6,6 +6,13 @@
   <title>Classes</title>
 </head>
 <body>
+    <p>
+      <a href="index.html">[ Classes</a> | 
+      <a href="sessions.html">Sessions</a> | 
+      <a href="assignments.html">Assignments</a> | 
+      <a href="students.html">Students</a> |
+      <a href="classesStudents.html">ClassesStudents</a> ]
+    </p>
   <h1>Classes</h1>
   <table>
     <thead>
@@ -53,24 +60,24 @@
     </tbody>
   </table>
   <form id="add-class-form">
+    <label>Add a new Class:</label><br>
     <label for="classNumber">Class Number:</label>
-    <input type="text" id="classNumber" name="classNumber">
+      <select id="classNumber" name="classNumber" required>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+      </select><br>
     <label for="className">Class Name:</label>
-    <input type="text" id="className" name="className">
+    <input type="text" id="className" name="className"><br>
     <label for="professorName">Professor Name:</label>
-    <input type="text" id="professorName" name="professorName">
+    <input type="text" id="professorName" name="professorName"><br>
     <label for="term">Term:</label>
-    <input type="text" id="term" name="term">
+    <input type="text" id="term" name="term"><br>
     <label for="location">Location:</label>
-    <input type="text" id="location" name="location">
+    <input type="text" id="location" name="location"><br>
     <label for="meetingTime">Meeting Time:</label>
-    <input type="text" id="meetingTime" name="meetingTime">
+    <input type="text" id="meetingTime" name="meetingTime"><br>
     <button type="submit">Add Class</button>
   </form>
-  <ul>
-    <li><a href="sessions.html">Sessions</a></li>
-    <li><a href="assignments.html">Assignments</a></li>
-    <li><a href="students.html">Students</a></li>
-  </ul>
 </body>
 </html>

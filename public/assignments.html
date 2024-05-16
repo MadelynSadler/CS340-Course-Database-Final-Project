@@ -6,7 +6,13 @@
   <title>Assignments</title>
 </head>
 <body>
-  <a href="./index.html"><p>&#8592;</p></a>
+  <p>
+    <a href="index.html">[ Classes</a> | 
+    <a href="sessions.html">Sessions</a> | 
+    <a href="assignments.html">Assignments</a> | 
+    <a href="students.html">Students</a> |
+    <a href="classesStudents.html">ClassesStudents</a> ]
+  </p>
   <h1>Assignments</h1>
   <table>
     <thead>
@@ -50,16 +56,25 @@
     </tbody>
   </table>
   <form id="add-assignment-form">
+    <label>Add a new assignment:</label><br>
     <label for="assignmentID">Assignment ID:</label>
-    <input type="text" id="assignmentID" name="assignmentID" required>
+    <select id="assignmentID" name="assignmentID" required>
+      <option value="10">10</option>
+      <option value="20">20</option>
+      <option value="30">30</option>
+    </select><br>
     <label for="classNumber">Class Number:</label>
-    <input type="text" id="classNumber" name="classNumber" required>
-    <label for="dueDate">Due Date:</label>
-    <input type="text" id="dueDate" name="dueDate" required>
+    <select id="classNumber" name="classNumber" required>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+    </select><br>
+      <label for="dueDate">Due Date:</label>
+    <input type="text" id="dueDate" name="dueDate" required><br>
     <label for="weight">Weight:</label>
-    <input type="text" id="weight" name="weight" required>
+    <input type="text" id="weight" name="weight" required><br>
     <label for="description">Description:</label>
-    <input type="text" id="description" name="description" required>
+    <input type="text" id="description" name="description" required><br>
     <button type="submit">Add Assignment</button>
   </form>
 </body>
