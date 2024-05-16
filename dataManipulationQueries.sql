@@ -59,25 +59,23 @@ SELECT classNumber from Sessions;
 SELECT classNumber from Assignments;
 
 -- insertion queries (5 - one for each table)
-INSERT INTO Classes (classNumber, className, professorName, term, location, meetingTime)
+INSERT INTO Classes (className, professorName, term, location, meetingTime)
 VALUES
-(:classNumber, :className, professorName, :term, :location, :meetingTime);
+(:className, professorName, :term, :location, :meetingTime);
 
-INSERT INTO Sessions (sessionID, classNumber, day, week, topic)
+INSERT INTO Sessions (classNumber, day, week, topic)
 VALUES
-(:sessionID, :classNumber, :day, :week, :topic);
+(:classNumber, :day, :week, :topic);
 
-INSERT INTO Assignments (assignmentID, classNumber, dueDate, weight, description)
+INSERT INTO Assignments (classNumber, dueDate, weight, description)
 VALUES
-(:assignmentID, :classNumber, :dueDate, :weight, :description);
+(:classNumber, :dueDate, :weight, :description);
 
-INSERT INTO Students (studentID)
-VALUES
-(:studentID);
+INSERT INTO Students () values ();
 
-INSERT INTO ClassesStudents (registrationID, classNumber, studentID)
+INSERT INTO ClassesStudents (classNumber, studentID)
 VALUES
-(:registrationID, :classNumber, ;studentID)
+(:classNumber, :studentID)
 
 -- update queries (1 - a NULLable relationship)
 
