@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sessions</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    p {
+      margin-bottom: 20px;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    th, td {
+      border: 1px solid #000;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      font-weight: bold;
+    }
+    form {
+      max-width: 400px;
+    }
+    form label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+    form input, form select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+    }
+    form button {
+      padding: 10px 15px;
+      border: none;
+      cursor: pointer;
+      background: #000;
+      color: #fff;
+      font-size: 16px;
+    }
+    form button:hover {
+      background: #444;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <p>
+      <a href="index.html">[ Classes</a> | 
+      <a href="sessions.html">Sessions</a> | 
+      <a href="assignments.html">Assignments</a> | 
+      <a href="students.html">Students</a> |
+      <a href="classesStudents.html">ClassesStudents</a> ]
+    </p>
+    <h1>Sessions</h1>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Session ID</th>
+        <th>Class Number</th>
+        <th>Day</th>
+        <th>Week</th>
+        <th>Topic</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>558</td>
+        <td>1</td>
+        <td>2024-01-16</td>
+        <td>2</td>
+        <td>OOP</td>
+        <td><button type="submit">Update</button></td>
+        <td><button type="submit">Delete</button></td>
+      </tr>
+      <tr>
+        <td>559</td>
+        <td>1</td>
+        <td>2024-01-18</td>
+        <td>2</td>
+        <td>Pointers</td>
+        <td><button type="submit">Update</button></td>
+        <td><button type="submit">Delete</button></td>
+      </tr>
+      <tr>
+        <td>560</td>
+        <td>1</td>
+        <td>2024-01-20</td>
+        <td>2</td>
+        <td>Memory allocation</td>
+        <td><button type="submit">Update</button></td>
+        <td><button type="submit">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <form id="add-session-form">
+    <label>Add a new Session:</label><br>
+    <form id="add-session-form">
+      <label for="classNumber">Class Number:</label>
+      <select id="classNumber" name="classNumber" required>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+      </select><br>
+    <label for="day">Day:</label>
+    <input type="text" id="day" name="day" required><br>
+    <label for="week">Week:</label>
+    <input type="text" id="week" name="week" required><br>
+    <label for="topic">Topic:</label>
+    <input type="text" id="topic" name="topic" required><br>
+    <button type="submit">Add Session</button>
+  </form>
+</body>
+</html>

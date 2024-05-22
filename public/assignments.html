@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assignments</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    p {
+      margin-bottom: 20px;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    th, td {
+      border: 1px solid #000;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      font-weight: bold;
+    }
+    form {
+      max-width: 400px;
+    }
+    form label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+    form input, form select{
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+    }
+    form button {
+      padding: 10px 15px;
+      border: none;
+      cursor: pointer;
+      background: #000;
+      color: #fff;
+      font-size: 16px;
+    }
+    form button:hover {
+      background: #444;
+    }
+  </style>
+</head>
+<body>
+  <p>
+    <a href="index.html">[ Classes</a> | 
+    <a href="sessions.html">Sessions</a> | 
+    <a href="assignments.html">Assignments</a> | 
+    <a href="students.html">Students</a> |
+    <a href="classesStudents.html">ClassesStudents</a> ]
+  </p>
+  <h1>Assignments</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Assignment ID</th>
+        <th>Class Number</th>
+        <th>Due Date</th>
+        <th>Weight</th>
+        <th>Description</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>10</td>
+        <td>1</td>
+        <td>2024-03-29</td>
+        <td>15.5</td>
+        <td>Hunt the Wumpus</td>
+        <td><button type="submit">Update</button></td>
+        <td><button type="submit">Delete</button></td>
+      </tr>
+      <tr>
+        <td>20</td>
+        <td>1</td>
+        <td>2024-03-30</td>
+        <td>10.0</td>
+        <td>Cafe Program</td>
+        <td><button type="submit">Update</button></td>
+        <td><button type="submit">Delete</button></td>
+      </tr>
+      <tr>
+        <td>30</td>
+        <td>1</td>
+        <td>2024-04-02</td>
+        <td>12.5</td>
+        <td>Basketball Pointers</td>
+        <td><button type="submit">Update</button></td>
+        <td><button type="submit">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <form id="add-assignment-form">
+    <label>Add a new assignment:</label><br>
+    <label for="classNumber">Class Number:</label>
+    <select id="classNumber" name="classNumber" required>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+    </select><br>
+      <label for="dueDate">Due Date:</label>
+    <input type="text" id="dueDate" name="dueDate" required><br>
+    <label for="weight">Weight:</label>
+    <input type="text" id="weight" name="weight" required><br>
+    <label for="description">Description:</label>
+    <input type="text" id="description" name="description" required><br>
+    <button type="submit">Add Assignment</button>
+  </form>
+</body>
+</html>

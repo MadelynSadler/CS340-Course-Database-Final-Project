@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Classes</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    p {
+      margin-bottom: 20px;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    th, td {
+      border: 1px solid #000;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      font-weight: bold;
+    }
+    form {
+      max-width: 400px;
+    }
+    form label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+    form input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+    }
+    form button {
+      padding: 10px 15px;
+      border: none;
+      cursor: pointer;
+      background: #000;
+      color: #fff;
+      font-size: 16px;
+    }
+    form button:hover {
+      background: #444;
+    }
+  </style>
+</head>
+<body>
+  <p>
+    <a href="index.html">[ Classes</a> | 
+    <a href="sessions.html">Sessions</a> | 
+    <a href="assignments.html">Assignments</a> | 
+    <a href="students.html">Students</a> | 
+    <a href="classesStudents.html">ClassesStudents</a> ]
+  </p>
+  <h1>Classes</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Class Number</th>
+        <th>Class Name</th>
+        <th>Professor Name</th>
+        <th>Term</th>
+        <th>Location</th>
+        <th>Meeting Time</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>CS162</td>
+        <td>Bob Joe</td>
+        <td>Spring</td>
+        <td>JOHN112</td>
+        <td>10:00-11:50</td>
+        <td><button type="submit">Update</button></td>
+        <td><button type="submit">Delete</button></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>CS261</td>
+        <td>John Smith</td>
+        <td>Spring</td>
+        <td>KIDD344</td>
+        <td>4:00-5:20</td>
+        <td><button type="submit">Update</button></td>
+        <td><button type="submit">Delete</button></td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>CS290</td>
+        <td>Jane Smith</td>
+        <td>Winter</td>
+        <td>KEC1004</td>
+        <td>12:00-12:50</td>
+        <td><button type="submit">Update</button></td>
+        <td><button type="submit">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <form id="add-class-form">
+    <label>Add a new Class:</label><br>
+    <label for="className">Class Name:</label>
+    <input type="text" id="className" name="className" required><br>
+    <label for="professorName">Professor Name:</label>
+    <input type="text" id="professorName" name="professorName" required><br>
+    <label for="term">Term:</label>
+    <input type="text" id="term" name="term" required><br>
+    <label for="location">Location:</label>
+    <input type="text" id="location" name="location" required><br>
+    <label for="meetingTime">Meeting Time:</label>
+    <input type="text" id="meetingTime" name="meetingTime" required><br>
+    <button type="submit">Add Class</button>
+  </form>
+</body>
+</html>

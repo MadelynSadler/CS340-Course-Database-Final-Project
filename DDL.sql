@@ -75,7 +75,7 @@ CREATE OR REPLACE TABLE ClassesStudents (
     classNumber INT,
     studentID INT,
     PRIMARY KEY (registrationID),
-    FOREIGN KEY (classNumber) REFERENCES Classes(classNumber),
+    FOREIGN KEY (classNumber) REFERENCES Classes(classNumber) ON DELETE CASCADE,
     FOREIGN KEY (studentID) REFERENCES Students(studentID)
 );
 
