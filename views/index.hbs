@@ -46,11 +46,13 @@
 <h2>Adding Data with AJAX</h2>
 <p>To add a new session, please enter the information below and click 'Submit'!</p>
     <form id="add-session-form-ajax">
-      <label for="input-classNumber">Class Number:</label>
       <select id="input-classNumber" name="input-classNumber" required>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
+        <option value="">Select a Class</option>
+        {{#each classes}}
+        <option value="{{this.classNumber}}">{{this.className}}</option>
+        {{!-- console.log(this.id)
+        console.log(this.name) --}}
+        {{/each}}
       </select><br>
 
       <label for="input-day">Day:</label>
@@ -67,3 +69,29 @@
 
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
 <script src="./js/add_session.js"></script>
+
+
+<h2>Updating A Session Form</h2>
+<p>To update a specific session, select the sessionID from the drop-down menu on the left.</p>
+<form id="update-session-form-ajax">
+
+    <label for="input-sessionID">SessionID: </label>
+    <select name="input-sessionID" id="mySelect">
+        <option value="test">Select a Session</option>
+        {{#each data}}
+        <option value="{{this.sessionID}}">{{this.week}} {{this.lname}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-homeworld">Homeworld: </label>
+    <select name="input-homeworld" id="input-homeworld-update">
+        <option>Select a Planet</option>
+        {{#each planets}}
+        <option value="{{this.id}}">{{this.name}}</option>
+        {{/each}}
+    </select>
+    <input type="submit">
+
+</form>
+
+<script src="./js/update_person.js"></script>
