@@ -83,6 +83,35 @@ app.post('/add-session-ajax', function(req, res)
         })
     });
 
+app.delete('/delete-session-ajax/', function(req,res,next){
+    let data = req.body;
+    let sessionID = parseInt(data.sessionID);
+    // remove from intersection table before native table
+    let deleteSession = `DELETE FROM Sessions WHERE sessionID = ?`;  
+    
+            // Run the 1st query
+            db.pool.query(deleteSession, [sessionID], function(error, rows, fields){
+                if (error) {
+    
+                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                console.log(error);
+                res.sendStatus(400);
+                }
+    
+                else
+                {
+                    // Run the second query
+                    db.pool.query(deleteSession, [sessionID], function(error, rows, fields) {
+    
+                        if (error) {
+                            console.log(error);
+                            res.sendStatus(400);
+                        } else {
+                            res.sendStatus(204);
+                        }
+                    })
+                }
+    })});
 
 /*
     LISTENER

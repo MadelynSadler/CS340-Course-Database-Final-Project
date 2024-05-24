@@ -78,6 +78,8 @@ addRowToTable = (data) => {
     let weekCell = document.createElement("TD");
     let topicCell = document.createElement("TD");
 
+    let deleteCell = document.createElement("TD")
+
     // Fill the cells with correct data
     sessionIDCell.innerText = newRow.sessionID;
     classNumberCell.innerText = newRow.classNumber;
@@ -85,13 +87,23 @@ addRowToTable = (data) => {
     weekCell.innerText = newRow.week;
     topicCell.innerText = newRow.topic;
 
+    deleteCell = document.createElement("button");
+    deleteCell.innerHTML = "Delete";
+    deleteCell.onclick = function(){
+        deleteSession(newRow.sessionID);
+    };
+
     // Add the cells to the row 
     row.appendChild(sessionIDCell);
     row.appendChild(classNumberCell);
     row.appendChild(dayCell);
     row.appendChild(weekCell);
     row.appendChild(topicCell);
-    
+    row.appendChild(deleteCell);
+
+    // Add a row attribute so the deleteRow function can find a newly added row
+    row.setAttribute('data-value', newRow.sessionID);
+
     // Add the row to the table
     currentTable.appendChild(row);
 }
