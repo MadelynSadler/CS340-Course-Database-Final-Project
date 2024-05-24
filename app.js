@@ -25,20 +25,9 @@ app.get('/', function(req, res)
     {  
         let query1 = "SELECT * FROM Sessions;";               // Define our query
 
-        let query2 = "SELECT * FROM Classes;";
-
         db.pool.query(query1, function(error, rows, fields){    // Execute the query
 
-            // save the sessions
-            let sessions = rows;
-
-            db.pool.query(query2, (error, rows, fields) => {
-
-                let classes = rows;
-                return res.render('index',  {data: sessions, classes: classes});
-            })
-
-            // res.render('index', {data: rows});                  // Render the index.hbs file, and also send the renderer
+            res.render('index', {data: rows});                  // Render the index.hbs file, and also send the renderer
         })                                                      // an object where 'data' is equal to the 'rows' we
     });                                                         // received back from the query                                      // requesting the web site.
 
