@@ -79,19 +79,19 @@
     <select name="input-sessionID" id="mySelect">
         <option value="test">Select a Session</option>
         {{#each data}}
-        <option value="{{this.sessionID}}">{{this.week}} {{this.lname}}</option>
+        <option value="{{this.sessionID}}">{{this.sessionID}}</option>
         {{/each}}
     </select>
 
-    <label for="input-homeworld">Homeworld: </label>
-    <select name="input-homeworld" id="input-homeworld-update">
-        <option>Select a Planet</option>
-        {{#each planets}}
-        <option value="{{this.id}}">{{this.name}}</option>
+    <label for="input-week">Week: </label>
+    <select name="input-week" id="input-week-update">
+        <option>Select a Week</option>
+        {{#each week}}
+        <option value="{{this.sessionID}}">{{this.week}}</option>
         {{/each}}
     </select>
     <input type="submit">
 
 </form>
 
-<script src="./js/update_person.js"></script>
+<script src="./js/update_session.js"></script>
