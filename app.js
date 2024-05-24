@@ -50,7 +50,7 @@ app.post('/add-session-ajax', function(req, res)
         }
     
         // Create the query and run it on the database
-        query1 = `INSERT INTO sessions (classNumber, day, week, topic) VALUES ('${data.classNumber}', '${data.day}', ${week}, ${topic})`;
+        query1 = `INSERT INTO Sessions (classNumber, day, week, topic) VALUES (${data.classNumber}, '${data.day}', ${data.week}, '${data.topic}')`;
         db.pool.query(query1, function(error, rows, fields){
     
             // Check to see if there was an error
