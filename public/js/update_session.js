@@ -9,17 +9,17 @@ updateSessionForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     // Get form fields we need to get data from
-    let inputSessionID = document.getElementById("mySelect");
-    let inputWeek = document.getElementById("input-week-update");
+    let inputDay = document.getElementById("mySelect");
+    let inputTopic = document.getElementById("input-topic-update");
 
     // Get the values from the form fields
-    let sessionIDValue = inputSessionID.value;
-    let weekValue = inputWeek.value;
+    let dayValue = inputDay.value;
+    let topicValue = inputTopic.value;
     
     // currently the database table for bsg_people does not allow updating values to NULL
-    // so we must abort if being bassed NULL for week
+    // so we must abort if being bassed NULL for topic
 
-    if (isNaN(weekValue)) 
+    if (isNaN(topicValue)) 
     {
         return;
     }
@@ -27,8 +27,8 @@ updateSessionForm.addEventListener("submit", function (e) {
 
     // Put our data we want to send in a javascript object
     let data = {
-        sessionID: sessionIDValue,
-        week: weekValue,
+        day: dayValue,
+        topic: topicValue,
     }
     
     // Setup our AJAX request
@@ -41,7 +41,7 @@ updateSessionForm.addEventListener("submit", function (e) {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
 
             // Add the new data to the table
-            updateRow(xhttp.response, sessionIDValue);
+            updateRow(xhttp.response, dayValue);
 
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
@@ -72,7 +72,7 @@ function updateRow(data, sessionID){
             let td = updateRowIndex.getElementsByTagName("td")[3];
 
             // Reassign week to our value we updated to
-            td.innerHTML = parsedData[0].week; 
+            td.innerHTML = parsedData[0].day; //DB
        }
     }
 }

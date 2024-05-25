@@ -107,11 +107,13 @@ addRowToTable = (data) => {
     // Add the row to the table
     currentTable.appendChild(row);
 
+    // Start of adding new data to dropdown menu for updating sessions
+
     // Find drop down menu, create a new option, fill data in the option (full name, id),
     // then append option to drop down menu so newly created rows via ajax will be found in it without needing a refresh
-    let selectMenu = document.getElementById("mySelect");
-    let option = document.createElement("option");
-    option.text = newRow.week;
-    option.value = newRow.sessionID;
-    selectMenu.add(option);
+    // let selectMenu = document.getElementById("mySelect");
+    // let option = document.createElement("option");
+    // option.text = newRow.week;
+    // option.value = newRow.sessionID;
+    // selectMenu.add(option);
 }

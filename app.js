@@ -127,14 +127,14 @@ app.delete('/delete-session-ajax/', function(req,res,next){
 app.put('/put-session-ajax', function(req,res,next){
     let data = req.body;
     
-    let week = parseInt(data.week);
-    let session = parseInt(data.sessionID);
+    let topic = data.topic;
+    let day = data.day;
     
-    let queryUpdateWeek = `UPDATE Sessions SET week = ? WHERE Sessions.sessionID = ?`;
+    let queryUpdateTopic = `UPDATE Sessions SET topic = ? WHERE day = ?`;
     let selectSessions = `SELECT * FROM Sessions WHERE sessionID = ?`
     
             // Run the 1st query
-            db.pool.query(queryUpdateWeek, [week, session], function(error, rows, fields){
+            db.pool.query(queryUpdateTopic, [topic, day], function(error, rows, fields){
                 if (error) {
     
                 // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
@@ -147,7 +147,7 @@ app.put('/put-session-ajax', function(req,res,next){
                 else
                 {
                     // Run the second query
-                    db.pool.query(selectSessions, [week], function(error, rows, fields) {
+                    db.pool.query(selectSessions, [day], function(error, rows, fields) {
     
                         if (error) {
                             console.log(error);

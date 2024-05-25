@@ -72,25 +72,21 @@
 
 
 <h2>Updating A Session Form</h2>
-<p>To update a specific session, select the sessionID from the drop-down menu on the left.</p>
+<p>To update the topic of a specific session, select the session date from the drop-down menu on the left and update the topic on the right.</p>
 <form id="update-session-form-ajax">
 
-    <label for="input-sessionID">SessionID: </label>
-    <select name="input-sessionID" id="mySelect">
-        <option value="test">Select a Session</option>
+    <label for="input-day">Session date: </label>
+    <select name="input-day" id="mySelect">
+        <option value="test">Select a session by day</option>
         {{#each data}}
-        <option value="{{this.sessionID}}">{{this.sessionID}}</option>
+        <option value="{{this.day}}">{{this.day}}</option>
         {{/each}}
     </select>
 
-    <label for="input-week">Week: </label>
-    <select name="input-week" id="input-week-update">
-        <option>Select a Week</option>
-        {{#each week}}
-        <option value="{{this.sessionID}}">{{this.week}}</option>
-        {{/each}}
-    </select>
-    <input type="submit">
+    <label for="input-topic">Topic:</label>
+    <input type="text" id="input-topic-update" name="input-topic-update" required><br>
+
+    <input type = "submit">
 
 </form>
 
