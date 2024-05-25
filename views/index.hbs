@@ -1,9 +1,11 @@
 <!-- index.hbs -->
 <h1>The server is running!</h1>
 <p>If you see this text, the server is <strong>definitely</strong> working!</p>
-{{!-- 
+
+{{!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> --}}
+
 {{!-- Create a table --}}
-<table>
+<table id="sessions-table">
 
     {{!-- Header section --}}
     <thead>
@@ -16,23 +18,76 @@
                 {{@key}}
             </th>
             {{/each}}
+            <th>delete</th>
         </tr>
     </thead>
 
     {{!-- Body section --}}
     <tbody>
 
-        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{!-- For each row, print session attributes in order --}}
         {{#each data}}
-        <tr>
+        <tr data-value={{this.sessionID}}>
+            <td>{{this.sessionID}}</td>
             <td>{{this.classNumber}}</td>
-            <td>{{this.className}}</td>
-            <td>{{this.professorName}}</td>
-            <td>{{this.term}}</td>
-            <td>{{this.location}}</td>
-            <td>{{this.meetingTime}}</td>
+            <td>{{this.day}}</td>
+            <td>{{this.week}}</td>
+            <td>{{this.topic}}</td>
+            <td><button onclick="deleteSession({{this.sessionID}})">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
 </table>
- --}}
+<script src="./js/delete_session.js"></script>
+
+<!-- /views/index.hbs -->
+
+{{!-- Form to add a record to the table  --}}
+<h2>Adding Data with AJAX</h2>
+<p>To add a new session, please enter the information below and click 'Submit'!</p>
+    <form id="add-session-form-ajax">
+      <select id="input-classNumber" name="input-classNumber" required>
+        <option value="">Select a Class</option>
+        {{#each classes}}
+        <option value="{{this.classNumber}}">{{this.className}}</option>
+        {{!-- console.log(this.id)
+        console.log(this.name) --}}
+        {{/each}}
+      </select><br>
+
+      <label for="input-day">Day:</label>
+      <input type="text" id="input-day" name="input-day" required><br>
+      
+      <label for="input-week">Week:</label>
+      <input type="text" id="input-week" name="input-week" required><br>
+      
+      <label for="input-topic">Topic:</label>
+      <input type="text" id="input-topic" name="input-topic" required><br>
+      
+      <button type="submit">Add Session</button>
+    </form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/add_session.js"></script>
+
+
+<h2>Updating A Session Form</h2>
+<p>To update the topic of a specific session, select the session date from the drop-down menu on the left and update the topic on the right.</p>
+<form id="update-session-form-ajax">
+
+    <label for="input-day">Session date: </label>
+    <select name="input-day" id="mySelect">
+        <option value="test">Select a session by day</option>
+        {{#each data}}
+        <option value="{{this.day}}">{{this.day}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-topic">Topic:</label>
+    <input type="text" id="input-topic-update" name="input-topic-update" required><br>
+
+    <input type = "submit">
+
+</form>
+
+<script src="./js/update_session.js"></script>
