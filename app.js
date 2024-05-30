@@ -124,6 +124,43 @@ app.delete('/delete-session-ajax/', function(req,res,next){
                 }
     })});
 
+    app.get('/get-classes-ajax', function(req, res)
+    {  
+        let query1 = "SELECT * FROM Classes;";               // Define our query
+
+        db.pool.query(query1, function(error, rows, fields){    // Execute the query
+
+            // save the sessions
+            let classes = rows;
+            return res.render('index',  {data: classes});
+
+        })                                                      // an object where 'data' is equal to the 'rows' we
+    });                                                       // received back from the query                                      // requesting the web site.
+
+app.post('/add-class-ajax', function(req, res) 
+    {
+        // Capture the incoming data and parse it back to a JS object
+        let data = req.body;
+    
+        // Create the query and run it on the database
+        query1 = `INSERT INTO Classes (classNumber, className, professorName, term, location, meetingTime) VALUES (${data.classNumber}, '${data.className}', ${data.professorName}, '${data.term}', '${data.location}', '${data.meetingTime}')`;
+        db.pool.query(query1, function(error, rows, fields){
+    
+            // Check to see if there was an error
+            if (error) {
+    
+                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                console.log(error)
+                res.sendStatus(400);
+            }
+            else {
+                    res.send(rows);
+                }
+            }
+        ) 
+    }
+);
+
 /*
     LISTENER
 */
