@@ -124,18 +124,18 @@ app.delete('/delete-session-ajax/', function(req,res,next){
                 }
     })});
 
-    app.get('/get-classes-ajax', function(req, res)
-    {  
-        let query1 = "SELECT * FROM Classes;";               // Define our query
+app.get('/get-classes-ajax', function(req, res)
+{  
+    let query1 = "SELECT * FROM Classes;";               // Define our query
 
-        db.pool.query(query1, function(error, rows, fields){    // Execute the query
+    db.pool.query(query1, function(error, rows, fields){    // Execute the query
 
-            // save the sessions
-            let classes = rows;
-            return res.render('index',  {data: classes});
+        // save the classes
+        let classes = rows;
+        return res.render('index',  {data: classes});
 
-        })                                                      // an object where 'data' is equal to the 'rows' we
-    });                                                       // received back from the query                                      // requesting the web site.
+    })                                                      // an object where 'data' is equal to the 'rows' we
+});                                                       // received back from the query                                      // requesting the web site.
 
 app.post('/add-class-ajax', function(req, res) 
     {
@@ -158,6 +158,73 @@ app.post('/add-class-ajax', function(req, res)
                 }
             }
         ) 
+    }
+);
+
+app.get('/get-assignments-ajax', function(req, res)
+{  
+    let query1 = "SELECT * FROM Assignments;";               // Define our query
+
+    let query2 = "SELECT * FROM Classes;";
+
+    db.pool.query(query1, function(error, rows, fields){    // Execute the query
+
+        // save the assignments
+        let assignments = rows;
+
+        db.pool.query(query2, (error, rows, fields) => {
+
+            let classes = rows;
+            return res.render('index',  {data: assignments, classes: classes});
+        })
+
+    })                                                      // an object where 'data' is equal to the 'rows' we
+});                                                       // received back from the query                                      // requesting the web site.
+
+app.post('/add-assignment-ajax', function(req, res) 
+    {
+        // Capture the incoming data and parse it back to a JS object
+        let data = req.body;
+
+        // Capture NULL values
+        let classNumber = parseInt(data.classNumber);
+        if (isNaN(classNumber))
+        {
+            classNumber = 'NULL'
+        }
+
+        // Create the query and run it on the database
+        query1 = `INSERT INTO Assignments (assignmentID, classNumber, dueDate, weight, description) VALUES (${data.assignmentID}, '${data.className}', ${data.dueDate}, '${data.weight}', '${data.description}')`;
+        db.pool.query(query1, function(error, rows, fields){
+
+            // Check to see if there was an error
+            if (error) {
+
+                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                console.log(error)
+                res.sendStatus(400);
+            }
+            else
+            {
+                // If there was no error, perform a SELECT * on sessions
+                query2 = `SELECT * FROM Assignments;`;
+                db.pool.query(query2, function(error, rows, fields){
+
+                    // If there was an error on the second query, send a 400
+                    if (error) {
+                        
+                        // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                        console.log(error);
+                        res.sendStatus(400);
+                    }
+                    // If all went well, send the results of the query back.
+                    else
+                    {
+                        res.send(rows);
+                    }
+                })
+            }
+        })
     }
 );
 

@@ -1,5 +1,5 @@
 // Get the objects we need to modify
-let addPersonForm = document.getElementById('add-class-form-ajax');
+let addPersonForm = document.getElementById('add-assignment-form-ajax');
 
 // Modify the objects we need
 addPersonForm.addEventListener("submit", function (e) {
@@ -9,27 +9,27 @@ addPersonForm.addEventListener("submit", function (e) {
 
     // Get form fields we need to get data from
     let classNumber = document.getElementById("input-classNumber");
-    let professorName = document.getElementById("input-professorName");
-    let term = document.getElementById("input-term");
-    let location = document.getElementById("input-location");
+    let dueDate = document.getElementById("input-dueDate");
+    let weight = document.getElementById("input-weight");
+    let description = document.getElementById("input-description");
 
     // Get the values from the form fields
     let classNumberValue = classNumber.value;
-    let professorNameValue = professorName.value;
-    let termValue = term.value;
-    let locationValue = location.value;
+    let dueDateValue = dueDate.value;
+    let weightValue = weight.value;
+    let descriptionValue = description.value;
 
     // Put our data we want to send in a javascript object
     let data = {
         classNumber: classNumberValue,
-        professorName: professorNameValue,
-        term: termValue,
-        location: locationValue
+        dueDate: professorNameValue,
+        weight: termValue,
+        description: locationValue
     }
     
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "/add-class-ajax", true);
+    xhttp.open("POST", "/add-assignment-ajax", true);
     xhttp.setRequestHeader("Content-type", "application/json");
 
     // Tell our AJAX request how to resolve
@@ -41,9 +41,9 @@ addPersonForm.addEventListener("submit", function (e) {
 
             // Clear the input fields for another transaction
             classNumber.value = '';
-            professorName.value = '';
-            term.value = '';
-            location.value = '';
+            dueDate.value = '';
+            weight.value = 0;
+            description.value = '';
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
@@ -61,7 +61,7 @@ addPersonForm.addEventListener("submit", function (e) {
 addRowToTable = (data) => {
 
     // Get a reference to the current table on the page and clear it out.
-    let currentTable = document.getElementById("classes-table");
+    let currentTable = document.getElementById("assignments-table");
 
     // Get the location where we should insert the new row (end of table)
     let newRowIndex = currentTable.rows.length;
@@ -72,31 +72,28 @@ addRowToTable = (data) => {
 
     // Create a row and 4 cells
     let row = document.createElement("TR");
+    let assignmentIDCell = document.createElement("TD");
     let classNumberCell = document.createElement("TD");
-    let classNameCell = document.createElement("TD");
-    let professorNameCell = document.createElement("TD");
-    let termCell = document.createElement("TD");
-    let locationCell = document.createElement("TD");
-    let meetingTimeCell = document.createElement("TD");
+    let dueDateCell = document.createElement("TD");
+    let weightCell = document.createElement("TD");
+    let descriptionCell = document.createElement("TD");
 
     // Fill the cells with correct data
+    assignmentIDCell.innerText = newRow.assignmentID;
     classNumberCell.innerText = newRow.classNumber;
-    classNameCell.innerText = newRow.className;
-    professorNameCell.innerText = newRow.professorName;
-    termCell.innerText = newRow.term;
-    locationCell.innerText = newRow.location;
-    meetingTimeCell.innerText = newRow.meetingTime;
+    dueDateCell.innerText = newRow.dueDate;
+    weightCell.innerText = newRow.weight;
+    descriptionCell.innerText = newRow.description;
 
     // Add the cells to the row 
+    row.appendChild(assignmentIDCell);
     row.appendChild(classNumberCell);
-    row.appendChild(classNameCell);
-    row.appendChild(professorNameCell);
-    row.appendChild(termCell);
-    row.appendChild(locationCell);
-    row.appendChild(meetingTimeCell);
+    row.appendChild(dueDateCell);
+    row.appendChild(weightCell);
+    row.appendChild(descriptionCell);
 
     // Add a row attribute so the deleteRow function can find a newly added row
-    row.setAttribute('data-value', newRow.classNumber);
+    row.setAttribute('data-value', newRow.sessionID);
 
     // Add the row to the table
     currentTable.appendChild(row);
