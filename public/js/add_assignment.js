@@ -93,7 +93,7 @@ addRowToTable = (data) => {
     row.appendChild(descriptionCell);
 
     // Add a row attribute so the deleteRow function can find a newly added row
-    row.setAttribute('data-value', newRow.sessionID);
+    row.setAttribute('data-value', newRow.assignmentID);
 
     // Add the row to the table
     currentTable.appendChild(row);
