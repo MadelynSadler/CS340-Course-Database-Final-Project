@@ -1,6 +1,8 @@
 <!-- index.hbs -->
 {{!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> --}}
 
+<a href="/classes">Classes Page</a>
+
 {{!-- Create a table --}}
 <h2>Sessions</h2>
 <table id="sessions-table">
@@ -54,7 +56,7 @@
       </select><br>
 
       <label for="input-day">Day:</label>
-      <input type="text" id="input-day" name="input-day" required><br>
+      <input type="text" id="input-day" name="input-day" required placeholder="YYYY-MM-DD"><br>
       
       <label for="input-week">Week:</label>
       <input type="text" id="input-week" name="input-week" required><br>
@@ -70,25 +72,21 @@
 
 
 <h2>Updating A Session Form</h2>
-<p>To update a specific session, select the sessionID from the drop-down menu on the left.</p>
+<p>To update the topic of a specific session, select the session from the drop-down menu on the left and update the topic on the right.</p>
 <form id="update-session-form-ajax">
 
-    <label for="input-sessionID">SessionID: </label>
-    <select name="input-sessionID" id="mySelect">
-        <option value="test">Select a Session</option>
+    <label for="input-day">SessionID: </label>
+    <select name="input-day" id="mySelect">
+        <option value="test">Select a session by ID</option>
         {{#each data}}
         <option value="{{this.sessionID}}">{{this.sessionID}}</option>
         {{/each}}
     </select>
 
-    <label for="input-homeworld">Homeworld: </label>
-    <select name="input-homeworld" id="input-homeworld-update">
-        <option>Select a Planet</option>
-        {{#each planets}}
-        <option value="{{this.id}}">{{this.name}}</option>
-        {{/each}}
-    </select>
-    <input type="submit">
+    <label for="input-topic">Topic:</label>
+    <input type="text" id="input-topic-update" name="input-topic-update" required><br>
+
+    <input type = "submit">
 
 </form>
 

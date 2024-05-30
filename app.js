@@ -137,6 +137,7 @@ app.get('/get-classes-ajax', function(req, res)
     })                                                      // an object where 'data' is equal to the 'rows' we
 });                                                       // received back from the query                                      // requesting the web site.
 
+
 app.post('/add-class-ajax', function(req, res) 
     {
         // Capture the incoming data and parse it back to a JS object
