@@ -321,10 +321,10 @@ app.get('/get-registration-ajax', function(req, res) {
         // save the registration
         let classesStudents = rows;
 
-        db.pool.query(query2, (error, rows, fields) => {
+        db.pool.query(query2, function(error, rows, fields) {
             let classes = rows;
 
-            db.pool.query(query3, (error, rows, fields) => {
+            db.pool.query(query3, function(error, rows, fields) {
                 let students = rows;
                 return res.render('registrations', {data: classesStudents, classes: classes, students: students});
             })
@@ -333,7 +333,7 @@ app.get('/get-registration-ajax', function(req, res) {
 });
 
 app.post('/add-registration-ajax', function(req, res) {
-    query1 = `INSERT INTO ClassesStudents (classNumber, studentID) VALUES (${data.classNumber}, ${data.studentID})`;
+    let query1 = `INSERT INTO ClassesStudents (classNumber, studentID) VALUES (${data.classNumber}, ${data.studentID})`;
     db.pool.query(query1, function(error, rows, fields) {
 
         if (error) {
@@ -367,26 +367,26 @@ app.post('/add-registration-ajax', function(req, res) {
 
 
 
-app.delete('/delete-registration-ajax/', function(req,res){
-    let data = req.body;
-    let registrationID = parseInt(data.registrationID);
-    // remove from intersection table before native table
-    let deleteRegistration = `DELETE FROM ClassesStudents WHERE registrationID = ?`;  
+// app.delete('/delete-registration-ajax/', function(req,res){
+//     let data = req.body;
+//     let registrationID = parseInt(data.registrationID);
+//     // remove from intersection table before native table
+//     let deleteRegistration = `DELETE FROM ClassesStudents WHERE registrationID = ?`;  
     
-            // Run the 1st query
-            db.pool.query(deleteRegistration, [registrationID], function(error, rows, fields){
-                if (error) {
+//             // Run the 1st query
+//             db.pool.query(deleteRegistration, [registrationID], function(error, rows, fields){
+//                 if (error) {
     
-                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-                console.log(error);
-                res.sendStatus(400);
-                }
+//                 // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+//                 console.log(error);
+//                 res.sendStatus(400);
+//                 }
     
-                else
-                {
-                    res.sendStatus(204);
-                }
-    })});
+//                 else
+//                 {
+//                     res.sendStatus(204);
+//                 }
+//     })});
 
 /*
     LISTENER

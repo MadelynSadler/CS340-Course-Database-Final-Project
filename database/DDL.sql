@@ -79,6 +79,12 @@ CREATE OR REPLACE TABLE ClassesStudents (
     FOREIGN KEY (studentID) REFERENCES Students(studentID)
 );
 
+
+INSERT INTO ClassesStudents (classNumber, studentID)
+VALUES
+(1, 123),
+(1, 124);
+
 SELECT * FROM Assignments;
 SELECT * FROM Classes;
 SELECT * FROM Sessions;
