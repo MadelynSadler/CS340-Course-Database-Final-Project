@@ -1,10 +1,12 @@
 <!-- index.hbs -->
-<h1>The server is running!</h1>
-<p>If you see this text, the server is <strong>definitely</strong> working!</p>
-
 {{!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> --}}
 
+<a href="/classes">Classes Page | </a>
+<a href="/get-assignments-ajax">Assignments Page |</a>
+<a href="get-students-ajax">Students Page |</a>
+
 {{!-- Create a table --}}
+<h2>Sessions</h2>
 <table id="sessions-table">
 
     {{!-- Header section --}}
@@ -43,7 +45,7 @@
 <!-- /views/index.hbs -->
 
 {{!-- Form to add a record to the table  --}}
-<h2>Adding Data with AJAX</h2>
+<h2>Adding a new session</h2>
 <p>To add a new session, please enter the information below and click 'Submit'!</p>
     <form id="add-session-form-ajax">
       <select id="input-classNumber" name="input-classNumber" required>
@@ -56,7 +58,7 @@
       </select><br>
 
       <label for="input-day">Day:</label>
-      <input type="text" id="input-day" name="input-day" required><br>
+      <input type="date" id="input-day" name="input-day" required placeholder="YYYY-MM-DD"><br>
       
       <label for="input-week">Week:</label>
       <input type="text" id="input-week" name="input-week" required><br>
@@ -72,14 +74,14 @@
 
 
 <h2>Updating A Session Form</h2>
-<p>To update the topic of a specific session, select the session date from the drop-down menu on the left and update the topic on the right.</p>
+<p>To update the topic of a specific session, select the session from the drop-down menu on the left and update the topic on the right.</p>
 <form id="update-session-form-ajax">
 
-    <label for="input-day">Session date: </label>
+    <label for="input-day">SessionID: </label>
     <select name="input-day" id="mySelect">
-        <option value="test">Select a session by day</option>
+        <option value="test">Select a session by ID</option>
         {{#each data}}
-        <option value="{{this.day}}">{{this.day}}</option>
+        <option value="{{this.sessionID}}">{{this.sessionID}}</option>
         {{/each}}
     </select>
 

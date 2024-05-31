@@ -1,0 +1,66 @@
+<!-- index.hbs -->
+
+<a href="/classes">Classes Page | </a>
+<a href="get-students-ajax">Students Page |</a>
+<a href="/">Sessions Page</a>
+
+{{!-- Create a table --}}
+<table id="assignments-table">
+
+    <h2>Assignments</h2>
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print class attributes in order --}}
+        {{#each data}}
+        <tr data-value={{this.assignmentID}}>
+            <td>{{this.assignmentID}}</td>
+            <td>{{this.classNumber}}</td>
+            <td>{{this.dueDate}}</td>
+            <td>{{this.weight}}</td>
+            <td>{{this.description}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<!-- /views/index.hbs -->
+
+{{!-- Form to add a record to the table  --}}
+<h2>Adding a new Assignment</h2>
+<p>To add a new assignment, please enter the information below and click 'Submit'!</p>
+    <form id="add-assignment-form-ajax">
+      <select id="input-classNumber" name="input-classNumber" required>
+        <option value="">Select a Class</option>
+        {{#each classes}}
+        <option value="{{this.classNumber}}">{{this.className}}</option>
+        {{/each}}
+      </select><br>
+
+      <label for="input-dueDate">Due Date:</label>
+      <input type="date" id="input-dueDate" name="input-dueDate" required><br>
+      
+      <label for="input-weight">Weight:</label>
+      <input type="float" id="input-weight" name="input-weight" required><br>
+      
+      <label for="input-description">Assignment Description:</label>
+      <input type="text" id="input-description" name="input-description" required><br>
+            
+      <button type="submit">Add Assignment</button>
+    </form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/add_assignment.js"></script>

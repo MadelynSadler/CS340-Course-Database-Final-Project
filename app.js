@@ -3,20 +3,27 @@
 /*
     SETUP
 */
-var express = require('express');   // We are using the express library for the web server
-var app     = express();            // We need to instantiate an express object to interact with the server in our code
+var express = require('express');
+var app = express();
+var path = require('path');
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-app.use(express.static('public'))
-PORT        = 1749;                 // Set a port number at the top so it's easy to change in the future
 
+PORT = 1749;
+
+// Database
 var db = require('./database/db-connector');
 
 // Handlebars
-const { engine } = require('express-handlebars');
-var exphbs = require('express-handlebars');     // Import express-handlebars
-app.engine('.hbs', engine({extname: ".hbs"}));  // Create an instance of the handlebars engine to process templates
-app.set('view engine', '.hbs');                 // Tell express to use the handlebars engine whenever it encounters a *.hbs file.
+var exphbs = require('express-handlebars');
+const { query } = require('express');
+app.engine('.hbs', exphbs.engine({
+    extname: ".hbs"
+}));
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', '.hbs');
+app.use(express.static('public'));               // Tell express to use the handlebars engine whenever it encounters a *.hbs file.
 
 /*
     ROUTES
@@ -124,40 +131,184 @@ app.delete('/delete-session-ajax/', function(req,res,next){
                 }
     })});
 
-app.put('/put-session-ajax', function(req,res,next){
-    let data = req.body;
+app.get('/classes', function(req, res)
+{  
+    let query1 = "SELECT * FROM Classes;";               // Define our query
+
+    db.pool.query(query1, function(error, rows, fields){    // Execute the query
+
+        if (error) {
+            console.error("Error executing query:", error);
+            return res.status(500).send("An error occurred while fetching classes.");
+        } else {
+            // save the classes
+            let classes = rows;
+            return res.render('classes',  {data: classes});
+        }
+
+
+    })                                                      // an object where 'data' is equal to the 'rows' we
+});                                                       // received back from the query                                      // requesting the web site.
+
+
+app.post('/add-class-ajax', function(req, res) 
+    {
+        // Capture the incoming data and parse it back to a JS object
+        let data = req.body;
+
+        let meetingTime = data.meetingTime;
+        // if (!isString(meetingTime))
+        // {
+        //     meetingTime = 'NULL'
+        // }
     
-    let topic = data.topic;
-    let day = data.day;
+        // Create the query and run it on the database
+        query1 = `INSERT INTO Classes (className, professorName, term, location, meetingTime) VALUES ('${data.className}', '${data.professorName}', '${data.term}', '${data.location}', '${data.meetingTime}')`;
+        db.pool.query(query1, function(error, rows, fields){
     
-    let queryUpdateTopic = `UPDATE Sessions SET topic = ? WHERE day = ?`;
-    let selectSessions = `SELECT * FROM Sessions WHERE sessionID = ?`
-    
-            // Run the 1st query
-            db.pool.query(queryUpdateTopic, [topic, day], function(error, rows, fields){
-                if (error) {
+            // Check to see if there was an error
+            if (error) {
     
                 // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-                console.log(error);
+                console.log(error)
                 res.sendStatus(400);
-                }
+            }
+            else {
+                query2 = `SELECT * FROM Classes;`;
+                db.pool.query(query2, function (error, rows, fields) {
+                    if (error) {
     
-                // If there was no error, we run our second query and return that data so we can use it to update the people's
-                // table on the front-end
-                else
-                {
-                    // Run the second query
-                    db.pool.query(selectSessions, [day], function(error, rows, fields) {
-    
-                        if (error) {
-                            console.log(error);
-                            res.sendStatus(400);
-                        } else {
-                            res.send(rows);
-                        }
-                    })
+                        // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                        console.log(error)
+                        res.sendStatus(400);
+                    }
+                    else {
+                        res.send(rows);
+                    }
+                })
                 }
-    })});
+            }
+        ) 
+    }
+);
+
+app.get('/get-assignments-ajax', function(req, res)
+{  
+    let query1 = "SELECT * FROM Assignments;";               // Define our query
+
+    let query2 = "SELECT * FROM Classes;";
+
+    db.pool.query(query1, function(error, rows, fields){    // Execute the query
+
+        // save the assignments
+        let assignments = rows;
+
+        db.pool.query(query2, (error, rows, fields) => {
+
+            let classes = rows;
+            return res.render('assignments',  {data: assignments, classes: classes});
+        })
+
+    })                                                      // an object where 'data' is equal to the 'rows' we
+});                                                       // received back from the query                                      // requesting the web site.
+
+app.post('/add-assignment-ajax', function(req, res) 
+    {
+        // Capture the incoming data and parse it back to a JS object
+        let data = req.body;
+
+        // Capture NULL values
+        let classNumber = parseInt(data.classNumber);
+        if (isNaN(classNumber))
+        {
+            classNumber = 'NULL'
+        }
+
+        // Create the query and run it on the database
+        query1 = `INSERT INTO Assignments (classNumber, dueDate, weight, description) VALUES (${data.classNumber}, '${data.dueDate}', '${data.weight}', '${data.description}')`;
+        db.pool.query(query1, function(error, rows, fields){
+
+            // Check to see if there was an error
+            if (error) {
+
+                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                console.log(error)
+                res.sendStatus(400);
+            }
+            else
+            {
+                // If there was no error, perform a SELECT * on sessions
+                query2 = `SELECT * FROM Assignments;`;
+                db.pool.query(query2, function(error, rows, fields){
+
+                    // If there was an error on the second query, send a 400
+                    if (error) {
+                        
+                        // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                        console.log(error);
+                        res.sendStatus(400);
+                    }
+                    // If all went well, send the results of the query back.
+                    else
+                    {
+                        res.send(rows);
+                    }
+                })
+            }
+        })
+    }
+);
+
+app.get('/get-students-ajax', function(req, res)
+{  
+    let query1 = "SELECT * FROM Students;";               // Define our query
+
+    db.pool.query(query1, function(error, rows, fields){    // Execute the query
+
+        // save the classes
+        let students = rows;
+        return res.render('students',  {data: students});
+
+    })                                                      // an object where 'data' is equal to the 'rows' we
+});                                                       // received back from the query                                      // requesting the web site.
+
+app.post('/add-student-ajax', function(req, res) 
+    {
+        // Capture the incoming data and parse it back to a JS object
+        // let data = req.body; 
+    
+        // Create the query and run it on the database
+        query1 = `INSERT INTO Students () values ()`;
+        db.pool.query(query1, function(error, rows, fields){
+    
+            // Check to see if there was an error
+            if (error) {
+    
+                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                console.log(error)
+                res.sendStatus(400);
+            }
+            else {
+                query2 = `SELECT * FROM Students;`
+                db.pool.query(query2, function(error, rows, fields) {
+                    // If there was an error on the second query, send a 400
+                    if (error) {
+                        
+                        // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                        console.log(error);
+                        res.sendStatus(400);
+                    }
+                    // If all went well, send the results of the query back.
+                    else
+                    {
+                        res.send(rows);
+                    }
+                })
+                }
+            }
+        ) 
+    }
+);
 
 /*
     LISTENER

@@ -1,0 +1,46 @@
+<!-- index.hbs -->
+
+<a href="/classes">Classes Page | </a>
+<a href="/get-assignments-ajax">Assignments Page |</a>
+<a href="/">Sessions Page</a>
+
+{{!-- Create a table --}}
+<table id="students-table">
+
+    <h2>Students</h2>
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print class attributes in order --}}
+        {{#each data}}
+        <tr data-value={{this.studentID}}>
+            <td>{{this.studentID}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<!-- /views/index.hbs -->
+
+{{!-- Form to add a record to the table  --}}
+<h2>Adding a new Student</h2>
+<p>To add a new student, please click 'Add Student'!</p>
+    <form id="add-student-form-ajax">            
+      <button type="submit">Add Student</button>
+    </form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/add_student.js"></script>
