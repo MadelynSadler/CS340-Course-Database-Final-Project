@@ -3,20 +3,27 @@
 /*
     SETUP
 */
-var express = require('express');   // We are using the express library for the web server
-var app     = express();            // We need to instantiate an express object to interact with the server in our code
+var express = require('express');
+var app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-app.use(express.static('public'))
-PORT        = 1749;                 // Set a port number at the top so it's easy to change in the future
+var router = express.Router();
 
+PORT = 1749;
+
+// Database
 var db = require('./database/db-connector');
 
 // Handlebars
-const { engine } = require('express-handlebars');
-var exphbs = require('express-handlebars');     // Import express-handlebars
-app.engine('.hbs', engine({extname: ".hbs"}));  // Create an instance of the handlebars engine to process templates
-app.set('view engine', '.hbs');                 // Tell express to use the handlebars engine whenever it encounters a *.hbs file.
+var exphbs = require('express-handlebars');
+const { query } = require('express');
+app.engine('.hbs', exphbs.engine({
+    extname: ".hbs"
+}));
+
+app.set('views', __dirname + '/views');
+app.set('view engine', '.hbs');
+app.use(express.static('public'));               // Tell express to use the handlebars engine whenever it encounters a *.hbs file.
 
 /*
     ROUTES
@@ -124,6 +131,7 @@ app.delete('/delete-session-ajax/', function(req,res,next){
                 }
     })});
 
+
 app.get('/get-classes-ajax', function(req, res)
 {  
     let query1 = "SELECT * FROM Classes;";               // Define our query
@@ -132,7 +140,7 @@ app.get('/get-classes-ajax', function(req, res)
 
         // save the classes
         let classes = rows;
-        return res.render('index',  {data: classes});
+        return res.render('classes',  {data: classes});
 
     })                                                      // an object where 'data' is equal to the 'rows' we
 });                                                       // received back from the query                                      // requesting the web site.
@@ -176,7 +184,7 @@ app.get('/get-assignments-ajax', function(req, res)
         db.pool.query(query2, (error, rows, fields) => {
 
             let classes = rows;
-            return res.render('index',  {data: assignments, classes: classes});
+            return res.render('assignments',  {data: assignments, classes: classes});
         })
 
     })                                                      // an object where 'data' is equal to the 'rows' we
@@ -237,7 +245,7 @@ app.get('/get-students-ajax', function(req, res)
 
         // save the classes
         let students = rows;
-        return res.render('index',  {data: students});
+        return res.render('students',  {data: students});
 
     })                                                      // an object where 'data' is equal to the 'rows' we
 });                                                       // received back from the query                                      // requesting the web site.
