@@ -131,7 +131,6 @@ app.delete('/delete-session-ajax/', function(req,res,next){
                 }
     })});
 
-
 app.get('/classes', function(req, res)
 {  
     let query1 = "SELECT * FROM Classes;";               // Define our query
