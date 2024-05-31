@@ -27,7 +27,7 @@
 
         {{!-- For each row, print class attributes in order --}}
         {{#each data}}
-        <tr data-value={{this.assignmentID}}>
+        <tr data-value={{this.studentID}}>
             <td>{{this.studentID}}</td>
         </tr>
         {{/each}}
@@ -39,7 +39,7 @@
 <h2>Adding a new Student</h2>
 <p>To add a new student, please click 'Add Student'!</p>
     <form id="add-student-form-ajax">            
-      <button type="submit">Add Assignment</button>
+      <button type="submit">Add Student</button>
     </form>
 
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}

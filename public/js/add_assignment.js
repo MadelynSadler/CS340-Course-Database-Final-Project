@@ -22,9 +22,9 @@ addAssignmentForm.addEventListener("submit", function (e) {
     // Put our data we want to send in a javascript object
     let data = {
         classNumber: classNumberValue,
-        dueDate: professorNameValue,
-        weight: termValue,
-        description: locationValue
+        dueDate: dueDateValue,
+        weight: weightValue,
+        description: descriptionValue
     }
     
     // Setup our AJAX request

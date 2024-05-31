@@ -226,7 +226,7 @@ app.post('/add-assignment-ajax', function(req, res)
         }
 
         // Create the query and run it on the database
-        query1 = `INSERT INTO Assignments (classNumber, dueDate, weight, description) VALUES ('${data.classNumber}', ${data.dueDate}, '${data.weight}', '${data.description}')`;
+        query1 = `INSERT INTO Assignments (classNumber, dueDate, weight, description) VALUES (${data.classNumber}, '${data.dueDate}', '${data.weight}', '${data.description}')`;
         db.pool.query(query1, function(error, rows, fields){
 
             // Check to see if there was an error
@@ -276,10 +276,10 @@ app.get('/get-students-ajax', function(req, res)
 app.post('/add-student-ajax', function(req, res) 
     {
         // Capture the incoming data and parse it back to a JS object
-        let data = req.body;
+        // let data = req.body; 
     
         // Create the query and run it on the database
-        query1 = `INSERT INTO Students (studentID) VALUES (${data.studentID})`;
+        query1 = `INSERT INTO Students () values ()`;
         db.pool.query(query1, function(error, rows, fields){
     
             // Check to see if there was an error
@@ -290,7 +290,21 @@ app.post('/add-student-ajax', function(req, res)
                 res.sendStatus(400);
             }
             else {
-                    res.send(rows);
+                query2 = `SELECT * FROM Students;`
+                db.pool.query(query2, function(error, rows, fields) {
+                    // If there was an error on the second query, send a 400
+                    if (error) {
+                        
+                        // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                        console.log(error);
+                        res.sendStatus(400);
+                    }
+                    // If all went well, send the results of the query back.
+                    else
+                    {
+                        res.send(rows);
+                    }
+                })
                 }
             }
         ) 

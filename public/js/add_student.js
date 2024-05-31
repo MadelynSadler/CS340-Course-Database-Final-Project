@@ -1,11 +1,13 @@
 // Get the objects we need to modify
-let addPersonForm = document.getElementById('add-assignment-form-ajax');
+let addStudentForm = document.getElementById('add-student-form-ajax');
 
 // Modify the objects we need
-addPersonForm.addEventListener("submit", function (e) {
+addStudentForm.addEventListener("submit", function (e) {
     
     // Prevent the form from submitting
     e.preventDefault();
+
+    let data = {}
     
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
@@ -49,7 +51,7 @@ addRowToTable = (data) => {
     let studentIDCell = document.createElement("TD");
 
     // Fill the cells with correct data
-    studentIDCell.innerText = newRow.assignmentID;
+    studentIDCell.innerText = newRow.studentID;
 
     // Add the cells to the row 
     row.appendChild(studentIDCell);
