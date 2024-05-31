@@ -310,6 +310,84 @@ app.post('/add-student-ajax', function(req, res)
     }
 );
 
+app.get('/get-registration-ajax', function(req, res) {
+    let query1 = "SELECT * from ClassesStudents;";
+
+    let query2 = "SELECT * from Classes;";
+    let query3 = "SELECT * from Students;";
+
+    db.pool.query(query1, function(error, rows, fields){
+
+        // save the registration
+        let classesStudents = rows;
+
+        db.pool.query(query2, (error, rows, fields) => {
+            let classes = rows;
+
+            db.pool.query(query3, (error, rows, fields) => {
+                let students = rows;
+                return res.render('registrations', {data: classesStudents, classes: classes, students: students});
+            })
+        })
+    })
+});
+
+app.post('/add-registration-ajax', function(req, res) {
+    query1 = `INSERT INTO ClassesStudents (classNumber, studentID) VALUES (${data.classNumber}, ${data.studentID})`;
+    db.pool.query(query1, function(error, rows, fields) {
+
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else
+        {
+            // If there was no error, perform a SELECT * on classesStudents
+            query2 = `SELECT * FROM ClassesStudents;`;
+            db.pool.query(query2, function(error, rows, fields){
+
+                // If there was an error on the second query, send a 400
+                if (error) {
+                    
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+})
+
+
+
+app.delete('/delete-registration-ajax/', function(req,res){
+    let data = req.body;
+    let registrationID = parseInt(data.registrationID);
+    // remove from intersection table before native table
+    let deleteRegistration = `DELETE FROM ClassesStudents WHERE registrationID = ?`;  
+    
+            // Run the 1st query
+            db.pool.query(deleteRegistration, [registrationID], function(error, rows, fields){
+                if (error) {
+    
+                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                console.log(error);
+                res.sendStatus(400);
+                }
+    
+                else
+                {
+                    res.sendStatus(204);
+                }
+    })});
+
 /*
     LISTENER
 */

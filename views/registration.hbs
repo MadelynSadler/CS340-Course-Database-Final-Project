@@ -1,0 +1,94 @@
+<!-- index.hbs -->
+{{!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> --}}
+
+<a href="/classes">Classes Page | </a>
+<a href="/get-assignments-ajax">Assignments Page |</a>
+<a href="get-students-ajax">Students Page |</a>
+<a href="/get-registration-ajax">Registration Page</a> |</a>
+
+{{!-- Create a table --}}
+<h2>Registration</h2>
+<table id="registration-table">
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th>delete</th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print registration attributes in order --}}
+        {{#each data}}
+        <tr data-value={{this.registrationID}}>
+            <td>{{this.registrationID}}</td>
+            <td>{{this.classNumber}}</td>
+            <td>{{this.studentID}}</td>
+            <td><button onclick="deleteSession({{this.registrationID}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<script src="./js/delete_registration.js"></script>
+
+<!-- /views/index.hbs -->
+
+{{!-- Form to add a record to the table  --}}
+<h2>Adding a new registration</h2>
+<p>To add a new registration, please enter the information below and click 'Submit'!</p>
+    <form id="add-registration-form-ajax">
+      <select id="input-classNumber" name="input-classNumber" required>
+        <option value="">Select a Class</option>
+        {{#each classes}}
+        <option value="{{this.classNumber}}">{{this.className}}</option>
+        {{!-- console.log(this.id)
+        console.log(this.name) --}}
+        {{/each}}
+      </select><br>
+
+      <select id="input-studentID" name="input-studentID" required>
+        <option value="">Select a Student</option>
+        {{#each students}}
+        <option value="{{this.studentID}}">{{this.studentID}}</option>
+        {{!-- console.log(this.id)
+        console.log(this.name) --}}
+        {{/each}}
+      </select><br>
+      
+      <button type="submit">Add Session</button>
+    </form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/add_registration.js"></script>
+
+
+<h2>Updating A Session Form</h2>
+<p>To update the topic of a specific registration, select the registration from the drop-down menu on the left and update the topic on the right.</p>
+<form id="update-registration-form-ajax">
+
+    <label for="input-studentID">SessionID: </label>
+    <select name="input-studentID" id="mySelect">
+        <option value="test">Select a registration by ID</option>
+        {{#each data}}
+        <option value="{{this.registrationID}}">{{this.registrationID}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-topic">Topic:</label>
+    <input type="text" id="input-topic-update" name="input-topic-update" required><br>
+
+    <input type = "submit">
+
+</form>
+
+<script src="./js/update_registration.js"></script>
