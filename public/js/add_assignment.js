@@ -1,8 +1,8 @@
 // Get the objects we need to modify
-let addPersonForm = document.getElementById('add-assignment-form-ajax');
+let addAssignmentForm = document.getElementById('add-assignment-form-ajax');
 
 // Modify the objects we need
-addPersonForm.addEventListener("submit", function (e) {
+addAssignmentForm.addEventListener("submit", function (e) {
     
     // Prevent the form from submitting
     e.preventDefault();

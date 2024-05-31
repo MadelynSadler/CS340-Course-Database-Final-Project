@@ -5,9 +5,9 @@
 */
 var express = require('express');
 var app = express();
+var path = require('path');
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-var router = express.Router();
 
 PORT = 1749;
 
@@ -21,7 +21,7 @@ app.engine('.hbs', exphbs.engine({
     extname: ".hbs"
 }));
 
-app.set('views', __dirname + '/views');
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', '.hbs');
 app.use(express.static('public'));               // Tell express to use the handlebars engine whenever it encounters a *.hbs file.
 
@@ -132,15 +132,21 @@ app.delete('/delete-session-ajax/', function(req,res,next){
     })});
 
 
-app.get('/get-classes-ajax', function(req, res)
+app.get('/classes', function(req, res)
 {  
     let query1 = "SELECT * FROM Classes;";               // Define our query
 
     db.pool.query(query1, function(error, rows, fields){    // Execute the query
 
-        // save the classes
-        let classes = rows;
-        return res.render('classes',  {data: classes});
+        if (error) {
+            console.error("Error executing query:", error);
+            return res.status(500).send("An error occurred while fetching classes.");
+        } else {
+            // save the classes
+            let classes = rows;
+            return res.render('classes',  {data: classes});
+        }
+
 
     })                                                      // an object where 'data' is equal to the 'rows' we
 });                                                       // received back from the query                                      // requesting the web site.
@@ -150,9 +156,15 @@ app.post('/add-class-ajax', function(req, res)
     {
         // Capture the incoming data and parse it back to a JS object
         let data = req.body;
+
+        let meetingTime = data.meetingTime;
+        // if (!isString(meetingTime))
+        // {
+        //     meetingTime = 'NULL'
+        // }
     
         // Create the query and run it on the database
-        query1 = `INSERT INTO Classes (classNumber, className, professorName, term, location, meetingTime) VALUES (${data.classNumber}, '${data.className}', ${data.professorName}, '${data.term}', '${data.location}', '${data.meetingTime}')`;
+        query1 = `INSERT INTO Classes (className, professorName, term, location, meetingTime) VALUES ('${data.className}', '${data.professorName}', '${data.term}', '${data.location}', '${data.meetingTime}')`;
         db.pool.query(query1, function(error, rows, fields){
     
             // Check to see if there was an error
@@ -163,7 +175,18 @@ app.post('/add-class-ajax', function(req, res)
                 res.sendStatus(400);
             }
             else {
-                    res.send(rows);
+                query2 = `SELECT * FROM Classes;`;
+                db.pool.query(query2, function (error, rows, fields) {
+                    if (error) {
+    
+                        // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                        console.log(error)
+                        res.sendStatus(400);
+                    }
+                    else {
+                        res.send(rows);
+                    }
+                })
                 }
             }
         ) 
@@ -203,7 +226,7 @@ app.post('/add-assignment-ajax', function(req, res)
         }
 
         // Create the query and run it on the database
-        query1 = `INSERT INTO Assignments (assignmentID, classNumber, dueDate, weight, description) VALUES (${data.assignmentID}, '${data.className}', ${data.dueDate}, '${data.weight}', '${data.description}')`;
+        query1 = `INSERT INTO Assignments (classNumber, dueDate, weight, description) VALUES ('${data.classNumber}', ${data.dueDate}, '${data.weight}', '${data.description}')`;
         db.pool.query(query1, function(error, rows, fields){
 
             // Check to see if there was an error

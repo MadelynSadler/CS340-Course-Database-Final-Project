@@ -1,11 +1,14 @@
 <!-- classes.hbs -->
 {{!-- Create a table --}}
 
-<a href="/">Sessions Link</a>
+<a href="/get-assignments-ajax">Assignments Page |</a>
+<a href="get-students-ajax">Students Page |</a>
+<a href="/">Sessions Page</a>
+
+<h2>Classes</h2>
 
 <table id="classes-table">
 
-    <h2>Classes</h2>
     {{!-- Header section --}}
     <thead>
 
@@ -43,20 +46,20 @@
 <p>To add a new class, please enter the information below and click 'Submit'!</p>
     <form id="add-class-form-ajax">
 
-      <label for="input-day">Name of Class:</label>
+      <label for="input-className">Name of Class:</label>
       <input type="text" id="input-className" name="input-className" required><br>
       
-      <label for="input-week">Professor:</label>
+      <label for="input-professorName">Professor:</label>
       <input type="text" id="input-professorName" name="input-professorName" required><br>
       
-      <label for="input-topic">Term:</label>
+      <label for="input-term">Term:</label>
       <input type="text" id="input-term" name="input-term" required><br>
       
-      <label for="input-topic">Location:</label>
+      <label for="input-location">Location:</label>
       <input type="text" id="input-location" name="input-location" required><br>
       
-      <label for="input-topic">Meeting Time:</label>
-      <input type="text" id="input-meetingTime" name="input-meetingTime" required><br>
+      <label for="input-meetingTime">Meeting Time:</label>
+      <input type="text" id="input-meetingTime" name="input-meetingTime"><br>
       
       <button type="submit">Add Class</button>
     </form>

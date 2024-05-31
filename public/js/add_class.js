@@ -1,30 +1,33 @@
 // Get the objects we need to modify
-let addPersonForm = document.getElementById('add-class-form-ajax');
+let addClassForm = document.getElementById('add-class-form-ajax');
 
 // Modify the objects we need
-addPersonForm.addEventListener("submit", function (e) {
+addClassForm.addEventListener("submit", function (e) {
     
     // Prevent the form from submitting
     e.preventDefault();
 
     // Get form fields we need to get data from
-    let classNumber = document.getElementById("input-classNumber");
+    let className = document.getElementById("input-className");
     let professorName = document.getElementById("input-professorName");
     let term = document.getElementById("input-term");
     let location = document.getElementById("input-location");
+    let meetingTime = document.getElementById("input-meetingTime");
 
     // Get the values from the form fields
-    let classNumberValue = classNumber.value;
+    let classNameValue = className.value;
     let professorNameValue = professorName.value;
     let termValue = term.value;
     let locationValue = location.value;
+    let meetingTimeValue = meetingTime.value;
 
     // Put our data we want to send in a javascript object
     let data = {
-        classNumber: classNumberValue,
+        className: classNameValue,
         professorName: professorNameValue,
         term: termValue,
-        location: locationValue
+        location: locationValue,
+        meetingTime: meetingTimeValue
     }
     
     // Setup our AJAX request
@@ -40,10 +43,11 @@ addPersonForm.addEventListener("submit", function (e) {
             addRowToTable(xhttp.response);
 
             // Clear the input fields for another transaction
-            classNumber.value = '';
+            className.value = '';
             professorName.value = '';
             term.value = '';
             location.value = '';
+            meetingTime.value = '';
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
