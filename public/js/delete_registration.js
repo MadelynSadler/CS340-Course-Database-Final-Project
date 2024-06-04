@@ -1,4 +1,4 @@
-function deleteSession(registrationID) {
+function deleteRegistration(registrationID) {
     // Put our data we want to send in a javascript object
     let data = {
         registrationID: registrationID
@@ -28,7 +28,7 @@ function deleteSession(registrationID) {
 
 function deleteRow(registrationID){
 
-    let table = document.getElementById("sessions-table");
+    let table = document.getElementById("registration-table");
     for (let i = 0, row; row = table.rows[i]; i++) {
        //iterate through rows
        //rows would be accessed using the "row" variable assigned in the for loop

@@ -34,7 +34,7 @@
             <td>{{this.registrationID}}</td>
             <td>{{this.classNumber}}</td>
             <td>{{this.studentID}}</td>
-            <td><button onclick="deleteSession({{this.registrationID}})">Delete</button></td>
+            <td><button onclick="deleteRegistration({{this.registrationID}})">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
@@ -59,7 +59,7 @@
       <select id="input-studentID" name="input-studentID" required>
         <option value="">Select a Student</option>
         {{#each students}}
-        <option value="{{this.studentID}}">{{this.s}}</option>
+        <option value="{{this.studentID}}">{{this.studentID}}</option>
         {{!-- console.log(this.id)
         console.log(this.name) --}}
         {{/each}}
