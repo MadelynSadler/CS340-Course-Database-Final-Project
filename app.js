@@ -137,7 +137,7 @@ app.get('/classes', function(req, res)
 
     db.pool.query(query1, function(error, rows, fields){    // Execute the query
 
-        if (error) {
+        if (error) {app.js
             console.error("Error executing query:", error);
             return res.status(500).send("An error occurred while fetching classes.");
         } else {
@@ -333,7 +333,11 @@ app.get('/get-registration-ajax', function(req, res) {
 });
 
 app.post('/add-registration-ajax', function(req, res) {
-    let query1 = `INSERT INTO ClassesStudents (classNumber, studentID) VALUES (${data.classNumber}, ${data.studentID})`;
+
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    query1 = `INSERT INTO ClassesStudents (classNumber, studentID) VALUES (${data.classNumber}, ${data.studentID})`;
     db.pool.query(query1, function(error, rows, fields) {
 
         if (error) {
