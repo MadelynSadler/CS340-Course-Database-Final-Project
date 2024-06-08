@@ -1,3 +1,8 @@
+/*
+All code found in this file is based on the osu-cs340-ecampus nodejs-starter-app repo found here:
+https://github.com/osu-cs340-ecampus/nodejs-starter-app
+*/
+
 
 // Get the objects we need to modify
 let updateRegistrationForm = document.getElementById('update-registration-form-ajax');

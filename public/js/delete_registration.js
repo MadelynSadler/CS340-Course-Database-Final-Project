@@ -1,3 +1,8 @@
+/*
+All code found in this file is based on the osu-cs340-ecampus nodejs-starter-app repo found here:
+https://github.com/osu-cs340-ecampus/nodejs-starter-app
+*/
+
 function deleteRegistration(registrationID) {
     // Put our data we want to send in a javascript object
     let data = {
