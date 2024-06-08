@@ -9,16 +9,16 @@ addSessionForm.addEventListener("submit", function (e) {
 
     // Get form fields we need to get data from
     let classNumber = document.getElementById("input-classNumber");
-    let studentID = document.getElementById("input-studentID");
+    let registrationID = document.getElementById("input-registration");
 
     // Get the values from the form fields
     let classNumberValue = classNumber.value;
-    let studentIDValue = studentID.value;
+    let registrationIDValue = registrationID.value;
 
     // Put our data we want to send in a javascript object
     let data = {
         classNumber: classNumberValue,
-        studentID: studentIDValue,
+        registrationID: registrationIDValue,
     }
     
     // Setup our AJAX request
@@ -35,7 +35,7 @@ addSessionForm.addEventListener("submit", function (e) {
 
             // Clear the input fields for another transaction
             classNumber.value = '';
-            studentID.value = '';
+            registrationID.value = '';
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
@@ -73,7 +73,7 @@ addRowToTable = (data) => {
     // Fill the cells with correct data
     registrationIDCell.innerText = newRow.registrationID;
     classNumberCell.innerText = newRow.classNumber;
-    studentIDCell.innerText = newRow.studentID;
+    studentIDCell.innerText = newRow.registrationID;
 
     deleteCell = document.createElement("button");
     deleteCell.innerHTML = "Delete";
@@ -93,5 +93,11 @@ addRowToTable = (data) => {
 
     // Add the row to the table
     currentTable.appendChild(row);
+
+    let selectMenu = document.getElementById("input-registration-update");
+    let option = document.createElement("option");
+    option.text = newRow.registrationID;
+    option.value = newRow.registrationID;
+    selectMenu.add(option);
 
 }

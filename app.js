@@ -9,7 +9,7 @@ var path = require('path');
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
-PORT = 1749;
+PORT = 1750;
 
 // Database
 var db = require('./database/db-connector');
@@ -395,6 +395,41 @@ app.delete('/delete-registration-ajax/', function(req,res){
                             res.sendStatus(400);
                         } else {
                             res.sendStatus(204);
+                        }
+                    })
+                }
+    })});
+
+app.put('/put-registration-ajax', function(req,res,next){
+    let data = req.body;
+    
+    let registration = parseInt(data.registration);
+    let classes = parseInt(data.classes);
+    
+    let queryUpdateRegistration = `UPDATE ClassesStudents SET classNumber = ? WHERE registrationID = ?`;
+    let selectClasses = `SELECT * FROM ClassesStudents WHERE registrationID = ?`
+    
+            // Run the 1st query
+            db.pool.query(queryUpdateRegistration, [classes, registration], function(error, rows, fields){
+                if (error) {
+    
+                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                console.log(error);
+                res.sendStatus(400);
+                }
+    
+                // If there was no error, we run our second query and return that data so we can use it to update the people's
+                // table on the front-end
+                else
+                {
+                    // Run the second query
+                    db.pool.query(selectClasses, [registration], function(error, rows, fields) {
+    
+                        if (error) {
+                            console.log(error);
+                            res.sendStatus(400);
+                        } else {
+                            res.send(rows);
                         }
                     })
                 }

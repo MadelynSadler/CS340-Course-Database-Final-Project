@@ -71,24 +71,28 @@
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
 <script src="./js/add_registration.js"></script>
 
-
-{{!-- <h2>Updating A Session Form</h2>
-<p>To update the topic of a specific registration, select the registration from the drop-down menu on the left and update the topic on the right.</p>
+<h2>Updating A Registration Form</h2>
+<p>To update a student's registration, select their registrationID from the drop-down menu on the left and their registered class from the drop down menu on the right</p>
 <form id="update-registration-form-ajax">
-
-    <label for="input-studentID">SessionID: </label>
-    <select name="input-studentID" id="mySelect">
-        <option value="test">Select a registration by ID</option>
+    
+    <label for="input-registration-update">Registration: </label>
+    <select name="input-registration" id="input-registration-update">
+        <option>Select a RegistrationID</option>
         {{#each data}}
         <option value="{{this.registrationID}}">{{this.registrationID}}</option>
         {{/each}}
     </select>
 
-    <label for="input-topic">Topic:</label>
-    <input type="text" id="input-topic-update" name="input-topic-update" required><br>
-
-    <input type = "submit">
+    <label for="input-classes-update">Class Number: </label>
+    <select name="input-classNumber" id="input-classes-update">
+        <option value="test">Select a Class</option>
+        {{#each classes}}
+        <option value="{{this.classNumber}}">{{this.className}}</option>
+        {{/each}}
+    </select>
+    
+    <input type="submit">
 
 </form>
 
-<script src="./js/update_registration.js"></script> --}}
+<script src="./js/update_registration.js"></script>
