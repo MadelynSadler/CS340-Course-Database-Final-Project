@@ -14,7 +14,7 @@ updateSessionForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     // Get form fields we need to get data from
-    let inputSessionID = document.getElementById("mySelect");
+    let inputSessionID = document.getElementById("sessionID-select");
     let inputTopic = document.getElementById("input-topic-update");
 
     // Get the values from the form fields

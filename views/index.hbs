@@ -84,18 +84,18 @@ https://github.com/osu-cs340-ecampus/nodejs-starter-app
 <p>To update the topic of a specific session, select the session from the drop-down menu on the left and update the topic on the right.</p>
 <form id="update-session-form-ajax">
 
-    <label for="input-day">SessionID: </label>
-    <select name="input-day" id="mySelect">
-        <option value="test">Select a session by ID</option>
+    <label for="sessionID-select">SessionID: </label>
+    <select name="sessionID" id="sessionID-select">
+        <option value="">Select a session by ID</option>
         {{#each data}}
         <option value="{{this.sessionID}}">{{this.sessionID}}</option>
         {{/each}}
     </select>
 
-    <label for="input-topic">Topic:</label>
+    <label for="input-topic-update">Topic:</label>
     <input type="text" id="input-topic-update" name="input-topic-update" required><br>
 
-    <button type = "submit">Update Session</button>
+    <input type = "submit" value="Update Session">
 
 </form>
 
