@@ -408,14 +408,14 @@ app.delete('/delete-registration-ajax/', function(req,res){
 app.put('/put-registration-ajax', function(req,res,next){
     let data = req.body;
     
-    let registration = parseInt(data.registration);
-    let classes = parseInt(data.classes);
+    let registrationID = parseInt(data.registrationID);
+    let classNumber = parseInt(data.classNumber);
     
     let queryUpdateRegistration = `UPDATE ClassesStudents SET classNumber = ? WHERE registrationID = ?`;
     let selectClasses = `SELECT * FROM ClassesStudents WHERE registrationID = ?`
     
             // Run the 1st query
-            db.pool.query(queryUpdateRegistration, [classes, registration], function(error, rows, fields){
+            db.pool.query(queryUpdateRegistration, [classNumber, registrationID], function(error, rows, fields){
                 if (error) {
     
                 // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
@@ -428,7 +428,7 @@ app.put('/put-registration-ajax', function(req,res,next){
                 else
                 {
                     // Run the second query
-                    db.pool.query(selectClasses, [registration], function(error, rows, fields) {
+                    db.pool.query(selectClasses, [registrationID], function(error, rows, fields) {
     
                         if (error) {
                             console.log(error);

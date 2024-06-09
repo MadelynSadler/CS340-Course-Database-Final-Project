@@ -14,17 +14,13 @@ addSessionForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     // Get form fields we need to get data from
-    let classNumber = document.getElementById("input-classNumber");
-    let registrationID = document.getElementById("input-registration");
-
-    // Get the values from the form fields
-    let classNumberValue = classNumber.value;
-    let registrationIDValue = registrationID.value;
+    let classNumber = document.getElementById("input-classNumber").value;
+    let studentID = document.getElementById("input-studentID").value;
 
     // Put our data we want to send in a javascript object
     let data = {
-        classNumber: classNumberValue,
-        registrationID: registrationIDValue,
+        classNumber: classNumber,
+        studentID: studentID,
     }
     
     // Setup our AJAX request
@@ -41,7 +37,7 @@ addSessionForm.addEventListener("submit", function (e) {
 
             // Clear the input fields for another transaction
             classNumber.value = '';
-            registrationID.value = '';
+            studentID.value = '';
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")

@@ -14,17 +14,13 @@ updateRegistrationForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     // Get form fields we need to get data from
-    let inputRegistration= document.getElementById("input-registration-update");
-    let inputClass = document.getElementById("input-classes-update");
-
-    // Get the values from the form fields
-    let registrationValue = inputRegistration.value;
-    let classValue = inputClass.value;
+    let registrationID= document.getElementById("input-registration-update").value;
+    let classNumber = document.getElementById("input-classes-update").value;
 
     // Put our data we want to send in a javascript object
     let data = {
-        registration: registrationValue,
-        classes: classValue,
+        registrationID: registrationID,
+        classNumber: classNumber,
     }
     
     // Setup our AJAX request
@@ -37,7 +33,7 @@ updateRegistrationForm.addEventListener("submit", function (e) {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
 
             // Add the new data to the table
-            updateRow(xhttp.response, registrationValue);
+            updateRow(xhttp.response, registrationID);
 
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
@@ -68,7 +64,7 @@ function updateRow(data, registrationID){
             let td = updateRowIndex.getElementsByTagName("td")[1];
 
             // Reassign homeworld to our value we updated to
-            td.innerHTML = parsedData[0].name; 
+            td.innerHTML = parsedData[0].classNumber; 
        }
     }
 }

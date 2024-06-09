@@ -27,7 +27,7 @@ https://github.com/osu-cs340-ecampus/nodejs-starter-app
                 {{@key}}
             </th>
             {{/each}}
-            <th>delete</th>
+            <th>Delete</th>
         </tr>
     </thead>
 
@@ -57,8 +57,6 @@ https://github.com/osu-cs340-ecampus/nodejs-starter-app
         <option value="">Select a Class</option>
         {{#each classes}}
         <option value="{{this.classNumber}}">{{this.className}}</option>
-        {{!-- console.log(this.id)
-        console.log(this.name) --}}
         {{/each}}
       </select><br>
 
@@ -66,8 +64,6 @@ https://github.com/osu-cs340-ecampus/nodejs-starter-app
         <option value="">Select a Student</option>
         {{#each students}}
         <option value="{{this.studentID}}">{{this.studentID}}</option>
-        {{!-- console.log(this.id)
-        console.log(this.name) --}}
         {{/each}}
       </select><br>
       
@@ -81,9 +77,9 @@ https://github.com/osu-cs340-ecampus/nodejs-starter-app
 <p>To update a student's registration, select their registrationID from the drop-down menu on the left and their registered class from the drop down menu on the right</p>
 <form id="update-registration-form-ajax">
     
-    <label for="input-registration-update">Registration: </label>
+    <label for="input-registration-update">Select a Registration: </label>
     <select name="input-registration" id="input-registration-update">
-        <option>Select a RegistrationID</option>
+        <option value="">Select a RegistrationID</option>
         {{#each data}}
         <option value="{{this.registrationID}}">{{this.registrationID}}</option>
         {{/each}}
@@ -91,13 +87,13 @@ https://github.com/osu-cs340-ecampus/nodejs-starter-app
 
     <label for="input-classes-update">Class Number: </label>
     <select name="input-classNumber" id="input-classes-update">
-        <option value="test">Select a Class</option>
+        <option value="">Select a Class</option>
         {{#each classes}}
         <option value="{{this.classNumber}}">{{this.className}}</option>
         {{/each}}
     </select>
     
-    <input type="submit">
+    <button type="submit">Update Registration</button>
 
 </form>
 
