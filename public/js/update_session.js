@@ -14,11 +14,11 @@ updateSessionForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     // Get form fields we need to get data from
-    let inputDay = document.getElementById("mySelect");
+    let inputSessionID = document.getElementById("mySelect");
     let inputTopic = document.getElementById("input-topic-update");
 
     // Get the values from the form fields
-    let dayValue = inputDay.value;
+    let sessionIDValue = inputSessionID.value;
     let topicValue = inputTopic.value;
     
     // currently the database table for bsg_people does not allow updating values to NULL
@@ -32,7 +32,7 @@ updateSessionForm.addEventListener("submit", function (e) {
 
     // Put our data we want to send in a javascript object
     let data = {
-        day: dayValue,
+        sessionID: sessionIDValue,
         topic: topicValue,
     }
     
@@ -46,7 +46,7 @@ updateSessionForm.addEventListener("submit", function (e) {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
 
             // Add the new data to the table
-            updateRow(xhttp.response, dayValue);
+            updateRow(xhttp.response, sessionIDValue);
 
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
@@ -74,10 +74,10 @@ function updateRow(data, sessionID){
             let updateRowIndex = table.getElementsByTagName("tr")[i];
 
             // Get td of week value
-            let td = updateRowIndex.getElementsByTagName("td")[3];
+            let td = updateRowIndex.getElementsByTagName("td")[4];
 
             // Reassign week to our value we updated to
-            td.innerHTML = parsedData[0].day; //DB
+            td.innerHTML = parsedData[0].topic; //DB
        }
     }
 }

@@ -136,6 +136,35 @@ app.delete('/delete-session-ajax/', function(req,res,next){
                 }
     })});
 
+app.put('/put-session-ajax', function (req, res, next) {
+    let data = req.body;
+    
+    let sessionID = parseInt(data.sessionID);
+    let topic = data.topic;
+
+    let queryUpdateSession = `UPDATE Sessions SET topic = ? WHERE sessionID = ?`;
+
+    db.pool.query(queryUpdateSession, [topic, sessionID], function (error, rows, fields) {
+        if (error) {
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            // Perform a SELECT * on Sessions to get the updated data
+            let querySelectSession = `SELECT * FROM Sessions WHERE sessionID = ?`;
+            db.pool.query(querySelectSession, [sessionID], function (error, rows, fields) {
+                if (error) {
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                    res.send(rows);
+                }
+            });
+        }
+    });
+});    
+
 app.get('/classes', function(req, res)
 {  
     let query1 = "SELECT * FROM Classes;";               // Define our query
