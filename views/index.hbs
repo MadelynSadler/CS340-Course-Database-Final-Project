@@ -83,7 +83,6 @@ https://github.com/osu-cs340-ecampus/nodejs-starter-app
 <h2>Updating A Session Form</h2>
 <p>To update the topic of a specific session, select the session from the drop-down menu on the left and update the topic on the right.</p>
 <form id="update-session-form-ajax">
-
     <label for="sessionID-select">SessionID: </label>
     <select name="sessionID" id="sessionID-select">
         <option value="">Select a session by ID</option>
@@ -91,12 +90,11 @@ https://github.com/osu-cs340-ecampus/nodejs-starter-app
         <option value="{{this.sessionID}}">{{this.sessionID}}</option>
         {{/each}}
     </select>
-
+    
     <label for="input-topic-update">Topic:</label>
-    <input type="text" id="input-topic-update" name="input-topic-update" required><br>
-
-    <input type = "submit" value="Update Session">
-
+    <input type="text" id="input-topic-update" name="input-topic-update"><br>
+    
+    <input type="submit" value="Update Session">
 </form>
 
 <script src="./js/update_session.js"></script>

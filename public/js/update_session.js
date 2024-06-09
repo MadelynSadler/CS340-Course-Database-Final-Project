@@ -14,15 +14,8 @@ updateSessionForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     // Get form fields we need to get data from
-    let inputSessionID = document.getElementById("sessionID-select");
-    let inputTopic = document.getElementById("input-topic-update");
-
-    // Get the values from the form fields
-    let sessionIDValue = inputSessionID.value;
-    let topicValue = inputTopic.value;
-    
-    // currently the database table for bsg_people does not allow updating values to NULL
-    // so we must abort if being bassed NULL for topic
+    let sessionID = document.getElementById("sessionID-select").value;
+    let topic = document.getElementById("input-topic-update").value;
 
     if (isNaN(topicValue)) 
     {
@@ -32,8 +25,8 @@ updateSessionForm.addEventListener("submit", function (e) {
 
     // Put our data we want to send in a javascript object
     let data = {
-        sessionID: sessionIDValue,
-        topic: topicValue,
+        sessionID: sessionID,
+        topic: topic,
     }
     
     // Setup our AJAX request
