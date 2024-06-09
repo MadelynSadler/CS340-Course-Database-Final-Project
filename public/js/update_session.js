@@ -17,11 +17,7 @@ updateSessionForm.addEventListener("submit", function (e) {
     let sessionID = document.getElementById("sessionID-select").value;
     let topic = document.getElementById("input-topic-update").value;
 
-    if (isNaN(topicValue)) 
-    {
-        return;
-    }
-
+    if (!sessionID) { return; }
 
     // Put our data we want to send in a javascript object
     let data = {
@@ -39,7 +35,7 @@ updateSessionForm.addEventListener("submit", function (e) {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
 
             // Add the new data to the table
-            updateRow(xhttp.response, sessionIDValue);
+            updateRow(xhttp.response, sessionID);
 
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
@@ -66,7 +62,7 @@ function updateRow(data, sessionID){
             // Get the location of the row where we found the matching session ID
             let updateRowIndex = table.getElementsByTagName("tr")[i];
 
-            // Get td of week value
+            // Get td of topic value
             let td = updateRowIndex.getElementsByTagName("td")[4];
 
             // Reassign week to our value we updated to
