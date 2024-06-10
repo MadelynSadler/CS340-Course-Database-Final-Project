@@ -75,7 +75,7 @@ addRowToTable = (data) => {
     // Fill the cells with correct data
     registrationIDCell.innerText = newRow.registrationID;
     classNumberCell.innerText = newRow.classNumber;
-    studentIDCell.innerText = newRow.registrationID;
+    studentIDCell.innerText = newRow.studentID;
 
     deleteCell = document.createElement("button");
     deleteCell.innerHTML = "Delete";
