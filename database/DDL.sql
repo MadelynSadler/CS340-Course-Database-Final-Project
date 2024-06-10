@@ -1,3 +1,6 @@
+-- Data Definition Queries: creates and populates the tables with example data
+-- This file corresponds to the CS340 Portfolio Project deliverables
+
 -- Disable commits and foreign key checks
 SET FOREIGN_KEY_CHECKS=0;
 SET AUTOCOMMIT = 0;
@@ -78,6 +81,12 @@ CREATE OR REPLACE TABLE ClassesStudents (
     FOREIGN KEY (classNumber) REFERENCES Classes(classNumber) ON DELETE CASCADE,
     FOREIGN KEY (studentID) REFERENCES Students(studentID)
 );
+
+
+INSERT INTO ClassesStudents (classNumber, studentID)
+VALUES
+(1, 123),
+(1, 124);
 
 SELECT * FROM Assignments;
 SELECT * FROM Classes;

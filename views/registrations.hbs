@@ -1,0 +1,100 @@
+{{!-- 
+All code found in this file is based on the osu-cs340-ecampus nodejs-starter-app repo found here:
+https://github.com/osu-cs340-ecampus/nodejs-starter-app
+--}}
+
+
+<nav>
+    <a href="/">Sessions Page | </a>
+    <a href="/classes">Classes Page | </a>
+    <a href="/get-assignments-ajax">Assignments Page |</a>
+    <a href="/get-students-ajax">Students Page |</a>
+    <a href="/get-registration-ajax">Registration Page</a>
+</nav>
+
+{{!-- Create a table --}}
+<h2>Registration</h2>
+<table id="registration-table">
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th>Delete</th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print registration attributes in order --}}
+        {{#each data}}
+        <tr data-value={{this.registrationID}}>
+            <td>{{this.registrationID}}</td>
+            <td>{{this.classNumber}}</td>
+            <td>{{this.studentID}}</td>
+            <td><button onclick="deleteRegistration({{this.registrationID}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<script src="./js/delete_registration.js"></script>
+
+<!-- /views/index.hbs -->
+
+{{!-- Form to add a record to the table  --}}
+<h2>Adding a new registration</h2>
+<p>To add a new registration, please enter the information below and click 'Submit'!</p>
+    <form id="add-registration-form-ajax">
+      <select id="input-classNumber" name="input-classNumber" required>
+        <option value="">Select a Class</option>
+        {{#each classes}}
+        <option value="{{this.classNumber}}">{{this.className}}</option>
+        {{/each}}
+      </select><br>
+
+      <select id="input-studentID" name="input-studentID" required>
+        <option value="">Select a Student</option>
+        {{#each students}}
+        <option value="{{this.studentID}}">{{this.studentID}}</option>
+        {{/each}}
+      </select><br>
+      
+      <button type="submit">Add Session</button>
+    </form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/add_registration.js"></script>
+
+<h2>Updating A Registration Form</h2>
+<p>To update a student's registration, select their registrationID from the drop-down menu on the left and their registered class from the drop down menu on the right</p>
+<form id="update-registration-form-ajax">
+    
+    <label for="input-registration-update">Select a Registration: </label>
+    <select name="input-registration" id="input-registration-update">
+        <option value="">Select a RegistrationID</option>
+        {{#each data}}
+        <option value="{{this.registrationID}}">{{this.registrationID}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-classes-update">Class Number: </label>
+    <select name="input-classNumber" id="input-classes-update">
+        <option value="">Select a Class</option>
+        {{#each classes}}
+        <option value="{{this.classNumber}}">{{this.className}}</option>
+        {{/each}}
+    </select>
+    
+    <button type="submit">Update Registration</button>
+
+</form>
+
+<script src="./js/update_registration.js"></script>

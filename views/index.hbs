@@ -1,9 +1,17 @@
-<!-- index.hbs -->
-{{!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> --}}
+{{!-- 
+All code found in this file is based on the osu-cs340-ecampus nodejs-starter-app repo found here:
+https://github.com/osu-cs340-ecampus/nodejs-starter-app
+--}}
 
-<a href="/classes">Classes Page | </a>
-<a href="/get-assignments-ajax">Assignments Page |</a>
-<a href="get-students-ajax">Students Page |</a>
+
+<nav>
+    <a href="/">Sessions Page | </a>
+    <a href="/classes">Classes Page | </a>
+    <a href="/get-assignments-ajax">Assignments Page |</a>
+    <a href="/get-students-ajax">Students Page |</a>
+    <a href="/get-registration-ajax">Registration Page</a>
+</nav>
+
 
 {{!-- Create a table --}}
 <h2>Sessions</h2>
@@ -72,24 +80,21 @@
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
 <script src="./js/add_session.js"></script>
 
-
 <h2>Updating A Session Form</h2>
 <p>To update the topic of a specific session, select the session from the drop-down menu on the left and update the topic on the right.</p>
 <form id="update-session-form-ajax">
-
-    <label for="input-day">SessionID: </label>
-    <select name="input-day" id="mySelect">
-        <option value="test">Select a session by ID</option>
+    <label for="sessionID-select">SessionID: </label>
+    <select name="sessionID" id="sessionID-select">
+        <option value="">Select a session by ID</option>
         {{#each data}}
         <option value="{{this.sessionID}}">{{this.sessionID}}</option>
         {{/each}}
     </select>
-
-    <label for="input-topic">Topic:</label>
-    <input type="text" id="input-topic-update" name="input-topic-update" required><br>
-
-    <input type = "submit">
-
+    
+    <label for="input-topic-update">Topic:</label>
+    <input type="text" id="input-topic-update" name="input-topic-update"><br>
+    
+    <input type="submit" value="Update Session">
 </form>
 
 <script src="./js/update_session.js"></script>
